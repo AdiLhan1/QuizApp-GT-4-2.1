@@ -88,12 +88,16 @@
     <SeekBar
         android:id="@+id/seek_bar"
         android:layout_width="250dp"
+        android:thumb="@drawable/thumb"
+        android:progressDrawable="@drawable/seekbar_style"
         android:layout_height="32dp"
         android:layout_marginStart="53dp"
         android:layout_marginTop="228dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="440dp"
-        android:max="50" />
+        android:splitTrack="false"
+        android:max="50"
+        tools:targetApi="lollipop" />
 
     <TextView
         style="@style/BoldText"
