@@ -87,7 +87,7 @@
 
     <SeekBar
         android:id="@+id/seek_bar"
-        android:layout_width="265dp"
+        android:layout_width="250dp"
         android:layout_height="32dp"
         android:layout_marginStart="53dp"
         android:layout_marginTop="228dp"
