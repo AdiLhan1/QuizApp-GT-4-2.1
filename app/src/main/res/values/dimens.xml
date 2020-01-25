@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginStart_161dp">161dp</dimen>
+    <dimen name="marginTop_89dp">89dp</dimen>
+    <dimen name="marginEnd_164dp">164dp</dimen>
+    <dimen name="marginBottom_503dp">503dp</dimen>
+    <dimen name="marginStartandEnd_88dp">85dp</dimen>
+    <dimen name="btn_marginBottom_145dp">155dp</dimen>
+</resources>
