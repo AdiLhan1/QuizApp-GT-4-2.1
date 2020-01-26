@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#AA00FF</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorPrimaryDark">#FF9800</color>
+    <color name="colorPrimaryDark">#00BFA5</color>
     <color name="colorAccent">#CF16DB</color>
     <color name="bgBottomNavigation">#2C44CC</color>
 </resources>

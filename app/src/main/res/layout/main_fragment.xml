@@ -73,6 +73,7 @@
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:layout_marginStart="67dp"
+        android:entries="@array/category_list"
         android:layout_marginTop="295dp"
         android:layout_marginEnd="68dp"
         android:layout_marginBottom="335dp" />
@@ -83,14 +84,14 @@
         android:layout_marginStart="67dp"
         android:layout_marginTop="371dp"
         android:layout_marginEnd="68dp"
+        android:entries="@array/difficulty_list"
         android:layout_marginBottom="335dp" />
 
     <SeekBar
         android:id="@+id/seek_bar"
         android:layout_width="250dp"
         android:thumb="@drawable/thumb"
-        android:progressDrawable="@drawable/seekbar_style"
-        android:layout_height="32dp"
+        android:layout_height="21dp"
         android:layout_marginStart="53dp"
         android:layout_marginTop="228dp"
         android:layout_marginEnd="48dp"
