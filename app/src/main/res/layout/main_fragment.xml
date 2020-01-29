@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,102 +9,112 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="75dp"
-        android:layout_marginStart="@dimen/marginStart_161dp"
-        android:layout_marginTop="@dimen/marginTop_89dp"
-        android:layout_marginEnd="@dimen/marginEnd_164dp"
-        android:layout_marginBottom="@dimen/marginBottom_503dp"
-        android:src="@drawable/tut" />
+        android:layout_marginTop="@dimen/img_top_dim"
+        android:src="@drawable/tut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         style="@style/StyleButton"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:layout_marginStart="@dimen/marginStartandEnd_88dp"
-        android:layout_marginTop="474dp"
-        android:layout_marginEnd="87dp"
-        android:layout_marginBottom="@dimen/btn_marginBottom_145dp" />
+        android:layout_marginTop="@dimen/startBtn_marginTop"
+        app:layout_constraintEnd_toEndOf="@+id/difficulty_spinner"
+        app:layout_constraintStart_toStartOf="@+id/difficulty_spinner"
+        app:layout_constraintTop_toBottomOf="@id/difficulty_spinner" />
 
     <TextView
+        android:id="@+id/questions_amount"
         android:layout_width="117dp"
         android:layout_height="16dp"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="203dp"
-        android:layout_marginEnd="191dp"
-        android:layout_marginBottom="448dp"
+        android:layout_marginTop="@dimen/qa_text_top_dim"
+        android:fontFamily="@font/bold"
         android:hint="@string/questions_amount"
         android:textColor="#A9A9A9"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/category_spinner"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview"
-        android:layout_width="17dp"
+        android:id="@+id/amount"
+        android:layout_width="19dp"
         android:layout_height="16dp"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="201dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="450dp"
+        android:fontFamily="@font/bold"
         android:text="@string/_25"
         android:textColor="#000"
-        android:textSize="15sp" />
+        app:layout_constraintStart_toEndOf="@id/questions_amount"
+        app:layout_constraintBottom_toBottomOf="@+id/questions_amount"
+        app:layout_constraintTop_toTopOf="@id/questions_amount" />
 
     <TextView
+        android:id="@+id/category_text_view"
         android:layout_width="81dp"
         android:layout_height="16dp"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="270dp"
-        android:layout_marginEnd="227dp"
-        android:layout_marginBottom="388dp"
+        android:fontFamily="@font/bold"
         android:hint="@string/category"
+        android:layout_marginTop="8dp"
         android:textColor="#000"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/category_spinner"
+        app:layout_constraintTop_toBottomOf="@id/seekBar" />
 
     <TextView
+        android:id="@+id/difficultly_text_view"
         android:layout_width="81dp"
         android:layout_height="16dp"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="351dp"
-        android:layout_marginEnd="227dp"
-        android:layout_marginBottom="398dp"
+        android:layout_marginTop="@dimen/difficultly_tv_marginTop"
+        android:fontFamily="@font/bold"
         android:hint="@string/difficulty"
         android:textColor="#000"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/category_spinner"
+        app:layout_constraintTop_toBottomOf="@id/category_spinner" />
 
 
     <Spinner
+        android:id="@+id/category_spinner"
         android:layout_width="240dp"
         android:layout_height="48dp"
-        android:layout_marginStart="67dp"
+        android:layout_marginTop="@dimen/spinner_marginTop"
         android:entries="@array/category_list"
-        android:layout_marginTop="295dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="335dp" />
+        android:fontFamily="@font/bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/category_text_view" />
 
     <Spinner
+        android:id="@+id/difficulty_spinner"
         android:layout_width="240dp"
         android:layout_height="48dp"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="371dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginTop="@dimen/spinner_marginTop"
         android:entries="@array/difficulty_list"
-        android:layout_marginBottom="335dp" />
+        android:fontFamily="@font/bold"
+        app:layout_constraintStart_toStartOf="@id/difficultly_text_view"
+        app:layout_constraintTop_toBottomOf="@id/difficultly_text_view" />
 
     <SeekBar
-        android:id="@+id/seek_bar"
-        android:layout_width="250dp"
-        android:thumb="@drawable/thumb"
+        android:id="@+id/seekBar"
+        android:layout_width="240dp"
         android:layout_height="21dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="228dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="440dp"
-        android:splitTrack="false"
+        android:layout_marginTop="8dp"
         android:max="50"
+        android:splitTrack="false"
+        android:thumb="@drawable/thumb"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="@id/category_spinner"
+        app:layout_constraintTop_toBottomOf="@id/questions_amount"
+        app:layout_constraintEnd_toEndOf="@id/category_spinner"
         tools:targetApi="lollipop" />
 
     <TextView
         style="@style/BoldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="32dp" />
-</FrameLayout>
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="@dimen/title_start_dim"
+        android:layout_marginTop="@dimen/title_top_dim"
+        android:gravity="center_horizontal|top"
+        android:text="@string/quiz"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

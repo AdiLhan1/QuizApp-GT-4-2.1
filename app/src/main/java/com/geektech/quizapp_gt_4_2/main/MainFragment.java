@@ -31,8 +31,8 @@ public class MainFragment extends CoreFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SeekBar seekBar = view.findViewById(R.id.seek_bar);
-        textView = view.findViewById(R.id.textview);
+        SeekBar seekBar = view.findViewById(R.id.seekBar);
+        textView = view.findViewById(R.id.amount);
         seekBar.setProgress(25);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

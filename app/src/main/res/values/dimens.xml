@@ -6,4 +6,25 @@
     <dimen name="marginBottom_503dp">503dp</dimen>
     <dimen name="marginStartandEnd_88dp">85dp</dimen>
     <dimen name="btn_marginBottom_145dp">155dp</dimen>
+    <dimen name="middle_text_size">16sp</dimen>
+    <dimen name="big_text_size">32sp</dimen>
+    <dimen name="title_top_dim">32dp</dimen>
+    <dimen name="title_start_dim">16dp</dimen>
+    <dimen name="img_top_dim">89dp</dimen>
+    <dimen name="qa_text_top_dim">203dp</dimen>
+    <dimen name="qa_text_start_dim">67dp</dimen>
+    <dimen name="amount_start_dim">5dp</dimen>
+    <dimen name="tv_category_marginTop">25dp</dimen>
+    <dimen name="difficultly_tv_marginTop">9dp</dimen>
+    <dimen name="spinner_marginTop">5dp</dimen>
+    <dimen name="startBtn_marginTop">64dp</dimen>
+    <dimen name="tittle_margin_start">19dp</dimen>
+    <dimen name="tittle_margin_top">32dp</dimen>
+    <dimen name="question_width">213dp</dimen>
+    <dimen name="question_height">70dp</dimen>
+    <dimen name="top_margin_middle">43dp</dimen>
+    <dimen name="margin_top_small">6dp</dimen>
+    <dimen name="skip_btn_width">90dp</dimen>
+    <dimen name="skip_btn_height">40dp</dimen>
+    <dimen name="skip_btn_margin_top">124dp</dimen>
 </resources>

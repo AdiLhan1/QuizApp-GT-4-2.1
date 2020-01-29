@@ -16,6 +16,7 @@
     <string name="difficulty">Difficulty</string>
     <string name="_25">25</string>
     <string name="settings">Settings</string>
+    <string name="quiz">Quiz</string>
     <string-array name="category_list">
         <item>All</item>
         <item>General Knowledge</item>
@@ -46,6 +47,7 @@
     <string-array name="difficulty_list">
         <item>All</item>
         <item>Easy</item>
+        <item>Medium</item>
         <item>Hard</item>
     </string-array>
 </resources>

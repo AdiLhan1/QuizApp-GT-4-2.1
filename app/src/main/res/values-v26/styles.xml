@@ -15,4 +15,13 @@
         <item name="android:textColor">#000</item>
         <item name="android:font">@font/bold</item>
     </style>
+
+    <style name="StyleButton">
+        <item name="android:background">@drawable/btn_stroke</item>
+        <item name="android:text">START</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:font">@font/bold</item>
+    </style>
 </resources>
