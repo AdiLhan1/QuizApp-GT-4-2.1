@@ -3,6 +3,7 @@ package com.geektech.quizapp_gt_4_2.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -13,8 +14,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
+import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.history.HistoryFragment;
+import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -39,6 +43,19 @@ public class MainActivity extends AppCompatActivity {
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initViewPager();
+        App.quizApiClient.getQuestions(new IQuizApiClient.QuestionsCallback() {
+            @Override
+            public void onSuccess(List<Question> questions) {
+                for (Question question : questions) {
+                    Log.e("TAG", question.getQuestion() + " " + question.getDifficulty());
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.e("TAG", "onFailure: " + e.getLocalizedMessage());
+            }
+        });
     }
 
     private void initViewPager() {
