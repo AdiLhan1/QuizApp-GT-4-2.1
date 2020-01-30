@@ -127,19 +127,10 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public class PageChange implements ViewPager.OnPageChangeListener {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
+    public class PageChange extends ViewPager.SimpleOnPageChangeListener {
         @Override
         public void onPageSelected(int position) {
             navigation.getMenu().getItem(position).setChecked(true);
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
         }
     }
 
