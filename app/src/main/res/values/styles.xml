@@ -13,8 +13,51 @@
         <item name="android:windowBackground">#fff</item>
     </style>
 
+    <style name="TVprogressBarStyle">
+        <item name="android:text">@string/_5_10</item>
+        <item name="android:font" tools:targetApi="o">@font/regular</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
     <style name="splashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
+    <style name="TVNameItemStyle">
+        <item name="android:text">Geography</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#1A051D</item>
+        <item name="android:font" tools:targetApi="o">@font/bold</item>
+    </style>
+
+    <style name="ButtonSkipSyle">
+        <item name="android:text">Skip</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:font" tools:targetApi="o">@font/bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/skip_btn_style</item>
+    </style>
+
+    <style name="ItemQuizQuestionTVStyle">
+        <item name="android:text">What is the largest city and commercial capital of Sri Lanka?
+        </item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#1A051D</item>
+        <item name="android:font" tools:targetApi="o">@font/bold</item>
+    </style>
+
+    <style name="ItemQuizButtonStyle">
+        <item name="android:textSize">14sp</item>\
+        <item name="android:textColor">#6979F8</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/btn_stroke</item>
+    </style>
+
+    <style name="ItemQuizButtonStyles">
+        <item name="android:textSize">14sp</item>\
+        <item name="android:textColor">#6979F8</item>
+        <item name="android:background">@drawable/btn_stroke</item>
     </style>
 
     <style name="StyleButton">
@@ -31,6 +74,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:font" tools:targetApi="o">@font/regular</item>
     </style>
+
     <style name="TitleText" parent="BoldText">
         <item name="android:textSize">24sp</item>
         <item name="android:font" tools:targetApi="o">@font/bold</item>

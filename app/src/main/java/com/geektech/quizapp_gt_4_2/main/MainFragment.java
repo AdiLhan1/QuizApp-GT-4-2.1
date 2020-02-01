@@ -1,11 +1,11 @@
 package com.geektech.quizapp_gt_4_2.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +24,8 @@ public class MainFragment extends CoreFragment {
     private MainViewModel mViewModel;
     private TextView textView;
     private Button btnstart;
+    private Spinner categorySpinner, difficultySpinner;
+    private SeekBar amountSeekbar;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -37,17 +39,27 @@ public class MainFragment extends CoreFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SeekBar seekBar = view.findViewById(R.id.seekBar);
+        amountSeekbar = view.findViewById(R.id.seekBar);
+        categorySpinner = view.findViewById(R.id.category_spinner);
+        difficultySpinner = view.findViewById(R.id.difficulty_spinner);
         textView = view.findViewById(R.id.amount);
         btnstart = view.findViewById(R.id.start_button);
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), QuizActivity.class));
+                QuizActivity.start(
+                        requireContext(),
+                        amountSeekbar.getProgress(),
+                        categorySpinner.getSelectedItem().toString(),
+                        difficultySpinner.getSelectedItem().toString());
+                Log.e("TAG", "Start properties : " + amountSeekbar.getProgress() + "-" +
+                        categorySpinner.getSelectedItem().toString() + "-" +
+                        difficultySpinner.getSelectedItem().toString());
+
             }
         });
-        seekBar.setProgress(25);
-        seekBar.setOnSeekBarChangeListener(new SeekBarChangeHelper() {
+        amountSeekbar.setProgress(25);
+        amountSeekbar.setOnSeekBarChangeListener(new SeekBarChangeHelper() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Log.e("------------", progress + "");

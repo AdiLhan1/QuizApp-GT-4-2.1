@@ -12,18 +12,18 @@ import retrofit2.http.Query;
 
 public class QuizApiClient implements IQuizApiClient {
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl("https://opentdb.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    QuizApi client = retrofit.create(QuizApi.class);
+    TriviaApi client = retrofit.create(TriviaApi.class);
 
     @Override
     public void getQuestions(final QuestionsCallback callback) {
         final Call<QuizQuestionResponse> call = client.getQuestions(
                 10,
-                null,
-                "hard"
+                21,
+                "medium"
         );
         Log.e("TAG", "getQuestions: URL-" + call.request().url());
         call.enqueue(new CoreCallback<QuizQuestionResponse>() {
@@ -38,14 +38,39 @@ public class QuizApiClient implements IQuizApiClient {
             }
         });
 
+
     }
 
-    private interface QuizApi {
+    @Override
+    public void getCategories(final CategoriesCallback callback) {
+        final Call<QuizCategoriesResponse> call = client.getCategories(10, 21, "easy");
+        Log.e("TAG", "getCategories: URL-2-" + call.request().url());
+        call.enqueue(new CoreCallback<QuizCategoriesResponse>() {
+            @Override
+            public void onSuccess(QuizCategoriesResponse result) {
+                callback.onSuccess(result.getTriviaCategories());
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                callback.onFailure(e);
+
+            }
+        });
+    }
+
+    private interface TriviaApi {
         @GET("api.php")
         Call<QuizQuestionResponse> getQuestions(
                 @Query("amount") int amount,
-                @Query("category") String category,
+                @Query("category") int category,
                 @Query("difficulty") String difficulty
         );
+
+        @GET("api_category.php")
+        Call<QuizCategoriesResponse> getCategories(@Query("amount") int amount,
+                                                   @Query("category") int category,
+                                                   @Query("difficulty") String difficulty);
+
     }
 }

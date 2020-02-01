@@ -90,16 +90,17 @@
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="240dp"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:min="5"
         android:max="50"
         android:splitTrack="false"
         android:thumb="@drawable/thumb"
         app:layout_constraintEnd_toEndOf="@id/category_spinner"
         app:layout_constraintStart_toStartOf="@id/category_spinner"
         app:layout_constraintTop_toBottomOf="@id/questions_amount"
-        tools:targetApi="lollipop" />
+        tools:targetApi="o" />
 
     <TextView
         style="@style/BoldText"

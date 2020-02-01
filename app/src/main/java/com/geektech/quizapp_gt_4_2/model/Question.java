@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Question {
     private String category;
-    private String type;
+    private EType type;
     private String question;
     private EDifficulty difficulty;
     @SerializedName("correctAnswers")
@@ -14,7 +14,10 @@ public class Question {
     @SerializedName("incorrectAnswers")
     private List<String> incorrectAnswers;
 
-    public Question(String category, String type, String question, EDifficulty difficulty, String correctAnswers, List<String> incorrectAnswers) {
+    public Question() {
+    }
+
+    public Question(String category, EType type, String question, EDifficulty difficulty, String correctAnswers, List<String> incorrectAnswers) {
         this.category = category;
         this.type = type;
         this.question = question;
@@ -31,11 +34,11 @@ public class Question {
         this.category = category;
     }
 
-    public String getType() {
+    public EType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(EType type) {
         this.type = type;
     }
 

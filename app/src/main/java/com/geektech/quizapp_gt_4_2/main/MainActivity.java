@@ -18,7 +18,7 @@ import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.history.HistoryFragment;
-import com.geektech.quizapp_gt_4_2.model.Question;
+import com.geektech.quizapp_gt_4_2.model.Category;
 import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -43,17 +43,15 @@ public class MainActivity extends AppCompatActivity {
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initViewPager();
-        App.quizApiClient.getQuestions(new IQuizApiClient.QuestionsCallback() {
+        App.quizApiClient.getCategories(new IQuizApiClient.CategoriesCallback() {
             @Override
-            public void onSuccess(List<Question> questions) {
-                for (Question question : questions) {
-                    Log.e("TAG", question.getQuestion() + " " + question.getDifficulty());
-                }
+            public void onSuccess(List<Category> result) {
+                Log.e("TAG", "MAIN: " + result.get(0).getName() + result.get(0).getId());
             }
 
             @Override
             public void onFailure(Exception e) {
-                Log.e("TAG", "onFailure: " + e.getLocalizedMessage());
+
             }
         });
     }
