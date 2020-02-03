@@ -39,6 +39,12 @@
         <item name="android:background">@drawable/skip_btn_style</item>
     </style>
 
+    <style name="SpinnerStyle">
+        <item name="android:layout_width">240dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+
     <style name="ItemQuizQuestionTVStyle">
         <item name="android:text">What is the largest city and commercial capital of Sri Lanka?
         </item>

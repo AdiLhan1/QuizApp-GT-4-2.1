@@ -18,6 +18,9 @@ import com.geektech.quizapp_gt_4_2.utils.SeekBarChangeHelper;
 
 import org.angmarch.views.NiceSpinner;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainFragment extends CoreFragment {
@@ -28,6 +31,7 @@ public class MainFragment extends CoreFragment {
     private NiceSpinner categorySpinner, difficultySpinner;
     private SeekBar amountSeekbar;
     private String difficult;
+    private Integer category;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -37,7 +41,6 @@ public class MainFragment extends CoreFragment {
     protected int getLayout() {
         return R.layout.main_fragment;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -46,20 +49,9 @@ public class MainFragment extends CoreFragment {
         difficultySpinner = view.findViewById(R.id.difficulty_spinner);
         textView = view.findViewById(R.id.amount);
         btnstart = view.findViewById(R.id.start_button);
-        btnstart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                QuizActivity.start(
-                        requireContext(),
-                        amountSeekbar.getProgress(),
-                        difficultySpinner.getSelectedIndex() + 8,
-                        getDifficultyId());
-                Log.e("TAG", "Start properties : " + amountSeekbar.getProgress() + "-" +
-                        categorySpinner.getSelectedItem().toString() + "-" +
-                        difficultySpinner.getSelectedItem().toString());
+        setSpinners(getResources().getStringArray(R.array.category_list), categorySpinner);
+        setSpinners(getResources().getStringArray(R.array.difficulty_list), difficultySpinner);
 
-            }
-        });
         amountSeekbar.setProgress(25);
         amountSeekbar.setOnSeekBarChangeListener(new SeekBarChangeHelper() {
             @Override
@@ -94,6 +86,24 @@ public class MainFragment extends CoreFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity()))
                 .get(MainViewModel.class);
+        btnstart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                category = categorySpinner.getSelectedIndex() + 8;
+                difficultySpinner.getSelectedIndex();
+
+                QuizActivity.start(
+                        requireContext(),
+                        amountSeekbar.getProgress(),
+                        category,
+                        getDifficultyId());
+            }
+        });
+    }
+
+    private void setSpinners(String[] array, NiceSpinner spinner) {
+        List<String> list = new LinkedList<>(Arrays.asList(array));
+        spinner.attachDataSource(list);
     }
 
 }
