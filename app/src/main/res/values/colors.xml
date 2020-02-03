@@ -5,4 +5,7 @@
     <color name="colorPrimaryDark">#00BFA5</color>
     <color name="colorAccent">#CF16DB</color>
     <color name="bgBottomNavigation">#2C44CC</color>
+    <color name="black">#000</color>
+    <color name="gray_text">#801F2041</color>
+    <color name="gray_color_def">#A9A9A9</color>
 </resources>

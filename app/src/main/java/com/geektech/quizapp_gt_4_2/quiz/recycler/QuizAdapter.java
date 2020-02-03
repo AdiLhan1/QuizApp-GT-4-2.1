@@ -1,5 +1,6 @@
 package com.geektech.quizapp_gt_4_2.quiz.recycler;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,17 @@ import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.Question;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
-    private ArrayList<Question> questionsList;
+    private List<Question> questionsList = new ArrayList<>();
 
-    public QuizAdapter(ArrayList<Question> list) {
-        questionsList = list;
+    public QuizAdapter() {
+    }
+
+    public void updateQuestion(List<Question> list) {
+        this.questionsList = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -29,6 +35,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
         holder.onBind(questionsList.get(position).getQuestion());
+        Log.e("TAG", "onBindViewHolder: " + position);
     }
 
     @Override

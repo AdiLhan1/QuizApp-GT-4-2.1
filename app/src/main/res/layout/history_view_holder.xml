@@ -1,0 +1,73 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="4dp"
+    android:layout_marginVertical="20dp"
+    android:layout_marginHorizontal="18dp"
+    tools:targetApi="o">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/title_start_dim"
+        android:paddingHorizontal="@dimen/title_start_dim"
+        tools:targetApi="o">
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Category: Mixed"
+            android:textSize="17sp"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/margin_top_small" />
+
+        <TextView
+            android:id="@+id/answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correct answers: 8/10"
+            app:layout_constraintTop_toBottomOf="@id/category"
+            app:layout_constraintStart_toStartOf="@id/category"
+            android:textSize="12sp"
+            android:textColor="@color/gray_text"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/difficult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/answer"
+            app:layout_constraintStart_toStartOf="@id/answer"
+            android:text="Difficulty:Easy"
+            android:textSize="12sp"
+            android:textColor="@color/gray_text"
+            android:layout_marginTop="@dimen/margin_top_small" />
+
+        <ImageView
+            android:id="@+id/dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/category"
+            app:layout_constraintBottom_toBottomOf="@id/category"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_vector" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/gray_text"
+            android:textSize="9sp"
+            android:text="12 may 2019 20:32" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

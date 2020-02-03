@@ -3,7 +3,6 @@ package com.geektech.quizapp_gt_4_2.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -14,11 +13,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
-import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.history.HistoryFragment;
-import com.geektech.quizapp_gt_4_2.model.Category;
 import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -41,19 +37,11 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel.class);
         navigation = findViewById(R.id.navigation);
+        mViewModel.getCategories();
+        mViewModel.getGlobal();
+        mViewModel.getQuestionsCount(9);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initViewPager();
-        App.quizApiClient.getCategories(new IQuizApiClient.CategoriesCallback() {
-            @Override
-            public void onSuccess(List<Category> result) {
-                Log.e("TAG", "MAIN: " + result.get(0).getName() + result.get(0).getId());
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-
-            }
-        });
     }
 
     private void initViewPager() {

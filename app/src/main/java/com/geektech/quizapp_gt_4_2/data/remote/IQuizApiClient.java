@@ -11,9 +11,21 @@ public interface IQuizApiClient {
 
     void getCategories(CategoriesCallback callback);
 
+    void getCountGlobal(CountGlobalCallback callback);
+
+    void getQuestionCount(Integer category, QuestionCountCallback questionCount);
+
     interface QuestionsCallback extends IBaseCallback<List<Question>> {
     }
 
     interface CategoriesCallback extends IBaseCallback<List<Category>> {
+    }
+
+    interface CountGlobalCallback extends IBaseCallback<QuizGlobalResponse> {
+
+    }
+
+    interface QuestionCountCallback extends IBaseCallback<QuizQuestionCount> {
+
     }
 }
