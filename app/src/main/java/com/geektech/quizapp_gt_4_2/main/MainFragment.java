@@ -41,6 +41,7 @@ public class MainFragment extends CoreFragment {
     protected int getLayout() {
         return R.layout.main_fragment;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -80,24 +81,20 @@ public class MainFragment extends CoreFragment {
         return difficult;
     }
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity()))
                 .get(MainViewModel.class);
-        btnstart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                category = categorySpinner.getSelectedIndex() + 8;
-                difficultySpinner.getSelectedIndex();
+        btnstart.setOnClickListener(v -> {
+            category = categorySpinner.getSelectedIndex() + 8;
+            difficultySpinner.getSelectedIndex();
 
-                QuizActivity.start(
-                        requireContext(),
-                        amountSeekbar.getProgress(),
-                        category,
-                        getDifficultyId());
-            }
+            QuizActivity.start(
+                    requireContext(),
+                    amountSeekbar.getProgress(),
+                    category,
+                    getDifficultyId());
         });
     }
 

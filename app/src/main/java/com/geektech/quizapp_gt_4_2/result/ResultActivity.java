@@ -1,5 +1,7 @@
 package com.geektech.quizapp_gt_4_2.result;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,9 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         resultViewModel = ViewModelProviders.of(this).get(ResultViewModel.class);
+    }
 
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, ResultActivity.class));
     }
 }

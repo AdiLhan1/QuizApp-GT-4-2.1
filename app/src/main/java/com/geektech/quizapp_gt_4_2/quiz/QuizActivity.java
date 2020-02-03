@@ -5,19 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
+import com.geektech.quizapp_gt_4_2.main.MainActivity;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizAdapter;
+import com.geektech.quizapp_gt_4_2.result.ResultActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class QuizActivity extends AppCompatActivity {
     private QuizAdapter adapter;
     private TextView quizCategoryName, quizAmount;
     private int amountQuantity;
+    private ProgressBar progressBar;
 
     public static void start(Context context, Integer amount, Integer category, String difficulty) {
         context.startActivity(new Intent(context, QuizActivity.class)
@@ -68,12 +70,7 @@ public class QuizActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         adapter = new QuizAdapter();
         recyclerView.setAdapter(adapter);
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+        recyclerView.setOnTouchListener((v, event) -> true);
 
     }
 
@@ -81,6 +78,7 @@ public class QuizActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.quiz_recyclerView);
         quizCategoryName = findViewById(R.id.quiz_categoryName);
         quizAmount = findViewById(R.id.quiz_amount);
+        progressBar = findViewById(R.id.quiz_item_progressBar);
     }
 
     private void getQuestions() {
@@ -89,13 +87,39 @@ public class QuizActivity extends AppCompatActivity {
         difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
         Log.e("TAG", "___++____++__+_+ " + amount + " " + category + " " + difficulty);
         quizViewModel.getQuestions(amount, category, difficulty);
-        quizViewModel.question.observe(this, new Observer<List<Question>>() {
-            @Override
-            public void onChanged(List<Question> questions) {
-                questionsList = questions;
-                adapter.updateQuestion(questions);
-            }
+        quizViewModel.question.observe(this, questions -> {
+            questionsList = questions;
+            adapter.updateQuestion(questions);
+            getPosition();
         });
+    }
 
+    private void getPosition() {
+        quizViewModel.currentPosition.observe(this, integer -> {
+            recyclerView.scrollToPosition(integer - 1);
+            quizAmount.setText(integer + "/" + amount);
+            progressBar.setProgress(integer);
+            progressBar.setMax(amount);
+            if (questionsList.size() > 0)
+                quizCategoryName.setText(questionsList.get(integer - 1).getCategory());
+            Log.e("порядок", "2");
+        });
+    }
+
+    public void btn_skip_click(View view) {
+        if (progressBar.getProgress() < amount) {
+            quizViewModel.nextPage();
+        } else {
+            ResultActivity.start(this);
+        }
+    }
+
+    public void btn_back_click(View view) {
+        if (progressBar.getProgress() != 1) {
+            quizViewModel.prevPage();
+        } else {
+            MainActivity.start(this);
+            finish();
+        }
     }
 }

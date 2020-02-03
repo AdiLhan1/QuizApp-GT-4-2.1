@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginStart="24dp"
+        android:onClick="btn_back_click"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,6 +64,7 @@
         style="@style/ButtonSkipSyle"
         android:layout_width="90dp"
         android:layout_height="40dp"
+        android:onClick="btn_skip_click"
         android:layout_marginBottom="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

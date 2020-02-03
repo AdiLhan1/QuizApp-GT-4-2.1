@@ -10,10 +10,14 @@ import com.geektech.quizapp_gt_4_2.model.Question;
 import java.util.List;
 
 public class QuizViewModel extends ViewModel {
-    private IQuizApiClient quizApiClient = App.quizApiClient;
-
     public MutableLiveData<List<Question>> question = new MutableLiveData<>();
     public MutableLiveData<Integer> currentPosition = new MutableLiveData<>();
+    private Integer count;
+
+    public QuizViewModel() {
+        currentPosition.setValue(1);
+        count = 1;
+    }
 
     public void getQuestions(int amount, Integer category, String difficulty) {
         App.quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
@@ -32,5 +36,13 @@ public class QuizViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
+    }
+
+    public void nextPage() {
+        currentPosition.setValue(++count);
+    }
+
+    public void prevPage() {
+        currentPosition.setValue(--count);
     }
 }
