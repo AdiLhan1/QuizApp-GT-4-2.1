@@ -7,7 +7,7 @@ import com.geektech.quizapp_gt_4_2.model.Question;
 import java.util.List;
 
 public interface IQuizApiClient {
-    void getQuestions(QuestionsCallback callback);
+    void getQuestions(int amount, Integer category, String difficulty, QuestionsCallback callback);
 
     void getCategories(CategoriesCallback callback);
 

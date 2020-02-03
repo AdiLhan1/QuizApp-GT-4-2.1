@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +16,8 @@ import com.geektech.quizapp_gt_4_2.core.CoreFragment;
 import com.geektech.quizapp_gt_4_2.quiz.QuizActivity;
 import com.geektech.quizapp_gt_4_2.utils.SeekBarChangeHelper;
 
+import org.angmarch.views.NiceSpinner;
+
 import java.util.Objects;
 
 public class MainFragment extends CoreFragment {
@@ -24,8 +25,9 @@ public class MainFragment extends CoreFragment {
     private MainViewModel mViewModel;
     private TextView textView;
     private Button btnstart;
-    private Spinner categorySpinner, difficultySpinner;
+    private NiceSpinner categorySpinner, difficultySpinner;
     private SeekBar amountSeekbar;
+    private String difficult;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -50,8 +52,8 @@ public class MainFragment extends CoreFragment {
                 QuizActivity.start(
                         requireContext(),
                         amountSeekbar.getProgress(),
-                        categorySpinner.getSelectedItem().toString(),
-                        difficultySpinner.getSelectedItem().toString());
+                        difficultySpinner.getSelectedIndex() + 8,
+                        getDifficultyId());
                 Log.e("TAG", "Start properties : " + amountSeekbar.getProgress() + "-" +
                         categorySpinner.getSelectedItem().toString() + "-" +
                         difficultySpinner.getSelectedItem().toString());
@@ -67,6 +69,25 @@ public class MainFragment extends CoreFragment {
             }
         });
     }
+
+    private String getDifficultyId() {
+        switch (difficultySpinner.getSelectedIndex()) {
+            case 1:
+                difficult = null;
+                break;
+            case 2:
+                difficult = "easy";
+                break;
+            case 3:
+                difficult = "medium";
+                break;
+            case 4:
+                difficult = "hard";
+                break;
+        }
+        return difficult;
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

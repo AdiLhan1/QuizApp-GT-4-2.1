@@ -19,11 +19,10 @@ public class QuizApiClient implements IQuizApiClient {
     TriviaApi client = retrofit.create(TriviaApi.class);
 
     @Override
-    public void getQuestions(final QuestionsCallback callback) {
-        final Call<QuizQuestionResponse> call = client.getQuestions(
-                10,
-                21,
-                "medium"
+    public void getQuestions(int amount, Integer category, String difficulty, final QuestionsCallback callback) {
+        final Call<QuizQuestionResponse> call = client.getQuestions(amount,
+                category,
+                difficulty
         );
         Log.e("TAG", "getQuestions: URL-" + call.request().url());
         call.enqueue(new CoreCallback<QuizQuestionResponse>() {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView quizCategoryName, quizAmount;
     private int amountQuantity;
 
-    public static void start(Context context, Integer amount, String category, String difficulty) {
+    public static void start(Context context, Integer amount, Integer category, String difficulty) {
         context.startActivity(new Intent(context, QuizActivity.class)
                 .putExtra(EXTRA_AMOUNT, amount)
                 .putExtra(EXTRA_CATEGORY, category)
@@ -52,7 +53,6 @@ public class QuizActivity extends AppCompatActivity {
         initViews();
         getQuestions();
         recyclerBuilder();
-
         quizAmount.setText(amountQuantity + "/" + getIntent().getIntExtra(EXTRA_AMOUNT, 10));
         quizCategoryName.setText(getIntent().getStringExtra(EXTRA_CATEGORY));
     }
@@ -71,7 +71,6 @@ public class QuizActivity extends AppCompatActivity {
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 return true;
             }
         });
@@ -88,6 +87,7 @@ public class QuizActivity extends AppCompatActivity {
         amount = getIntent().getIntExtra(EXTRA_AMOUNT, 10);
         category = getIntent().getIntExtra(EXTRA_CATEGORY, 21);
         difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
+        Log.e("TAG", "___++____++__+_+ " + amount + " " + category + " " + difficulty);
         quizViewModel.getQuestions(amount, category, difficulty);
         quizViewModel.question.observe(this, new Observer<List<Question>>() {
             @Override
