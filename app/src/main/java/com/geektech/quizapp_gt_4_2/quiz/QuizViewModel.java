@@ -1,5 +1,7 @@
 package com.geektech.quizapp_gt_4_2.quiz;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -28,7 +30,7 @@ public class QuizViewModel extends ViewModel {
 
             @Override
             public void onFailure(Exception e) {
-
+                Log.e("TAG", "onFailure: " + e);
             }
         });
     }

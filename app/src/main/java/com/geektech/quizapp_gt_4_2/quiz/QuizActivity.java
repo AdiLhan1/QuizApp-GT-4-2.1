@@ -18,12 +18,13 @@ import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.main.MainActivity;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizAdapter;
+import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizViewHolder;
 import com.geektech.quizapp_gt_4_2.result.ResultActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Listener {
     QuizViewModel quizViewModel;
     private static final String EXTRA_AMOUNT = "amount";
     private static final String EXTRA_CATEGORY = "category";
@@ -68,7 +69,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         };
         recyclerView.setLayoutManager(manager);
-        adapter = new QuizAdapter();
+        adapter = new QuizAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnTouchListener((v, event) -> true);
 
@@ -121,5 +122,10 @@ public class QuizActivity extends AppCompatActivity {
             MainActivity.start(this);
             finish();
         }
+    }
+
+    @Override
+    public void onAnswerClick(int position, int selectedAnswerPosition) {
+
     }
 }

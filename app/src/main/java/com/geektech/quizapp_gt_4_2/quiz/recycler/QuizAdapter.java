@@ -16,8 +16,10 @@ import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     private List<Question> questionsList = new ArrayList<>();
+    private QuizViewHolder.Listener listener;
 
-    public QuizAdapter() {
+    public QuizAdapter(QuizViewHolder.Listener listener) {
+        this.listener = listener;
     }
 
     public void updateQuestion(List<Question> list) {
@@ -29,7 +31,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     @Override
     public QuizViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quiz_item, parent, false);
-        return new QuizViewHolder(view);
+        return new QuizViewHolder(view, listener);
     }
 
     @Override
@@ -41,5 +43,11 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     @Override
     public int getItemCount() {
         return questionsList.size();
+    }
+
+    public void setQuestionsList(List<Question> questionsList) {
+        this.questionsList.clear();
+        this.questionsList.addAll(questionsList);
+        notifyDataSetChanged();
     }
 }

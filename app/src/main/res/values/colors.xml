@@ -8,4 +8,8 @@
     <color name="black">#000</color>
     <color name="gray_text">#801F2041</color>
     <color name="gray_color_def">#A9A9A9</color>
+    <color name="colorBlack">#000</color>
+    <color name="purple">#BE52F2</color>
+    <color name="dark_purple">#3F3356</color>
+    <color name="colorGrey">#A9A9A9</color>
 </resources>

@@ -102,4 +102,11 @@
 
     </style>
 
+    <style name="BigText" parent="BoldText">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:color">@color/colorBlack</item>
+    </style>
+
+
 </resources>
