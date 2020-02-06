@@ -87,12 +87,15 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         category = getIntent().getIntExtra(EXTRA_CATEGORY, 21);
         difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
         Log.e("TAG", "___++____++__+_+ " + amount + " " + category + " " + difficulty);
-        quizViewModel.getQuestions(amount, category, difficulty);
-        quizViewModel.question.observe(this, questions -> {
-            questionsList = questions;
-            adapter.updateQuestion(questions);
-            getPosition();
-        });
+        if (category == 8) {
+            category = 0;
+            quizViewModel.getQuestions(amount, category, difficulty);
+            quizViewModel.question.observe(this, questions -> {
+                questionsList = questions;
+                adapter.updateQuestion(questions);
+                getPosition();
+            });
+        }
     }
 
     private void getPosition() {

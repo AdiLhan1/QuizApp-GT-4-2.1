@@ -65,16 +65,16 @@ public class MainFragment extends CoreFragment {
 
     private String getDifficultyId() {
         switch (difficultySpinner.getSelectedIndex()) {
-            case 1:
+            case 0:
                 difficult = null;
                 break;
-            case 2:
+            case 1:
                 difficult = "easy";
                 break;
-            case 3:
+            case 2:
                 difficult = "medium";
                 break;
-            case 4:
+            case 3:
                 difficult = "hard";
                 break;
         }
