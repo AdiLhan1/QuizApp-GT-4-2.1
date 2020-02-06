@@ -1,8 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".result.ResultActivity">
 
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop_25"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/regular"
+        android:text="Result"
+        android:textColor="@color/colorBlack"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop_90"
+        android:src="@drawable/img_done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="342dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="@dimen/marginTop_25"
+        app:cardElevation="4dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgResult"
+        app:strokeWidth="4dp">
+
+        <TextView
+            android:id="@+id/tvResult_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="@dimen/marginTop_22"
+            android:fontFamily="@font/regular"
+            android:text="Category: Mixed"
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvResult_difficulty"
+            style="@style/ResultCardViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="@dimen/marginTop_81"
+            android:text="Difficulty:" />
+
+        <TextView
+            android:id="@+id/tvAnswerResult"
+            style="@style/ResultCardViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="@dimen/marginTop_81"
+            android:text="Correct answers:" />
+
+        <TextView
+            android:id="@+id/tv_result"
+            style="@style/ResultCardViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="262dp"
+            android:layout_marginTop="@dimen/marginTop_81"
+            android:text="Result:" />
+
+        <TextView
+            android:id="@+id/tvResult_difficulty2"
+            style="ResultTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="@dimen/marginTop_100"
+            android:text="All" />
+
+        <TextView
+            android:id="@+id/tvAnswerResult2"
+            style="ResultTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="142dp"
+            android:layout_marginTop="@dimen/marginTop_100"
+            android:text="8/10" />
+
+        <TextView
+            android:id="@+id/tv_result2"
+            style="ResultTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="@dimen/marginTop_100"
+            android:text="80%" />
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginBottom_80"
+        android:background="@drawable/rounded_btn_green"
+        android:text="Finish"
+        android:onClick="btn_finish"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

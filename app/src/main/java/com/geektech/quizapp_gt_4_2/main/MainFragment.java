@@ -89,7 +89,6 @@ public class MainFragment extends CoreFragment {
         btnstart.setOnClickListener(v -> {
             category = categorySpinner.getSelectedIndex() + 8;
             difficultySpinner.getSelectedIndex();
-
             QuizActivity.start(
                     requireContext(),
                     amountSeekbar.getProgress(),

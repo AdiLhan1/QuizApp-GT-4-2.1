@@ -94,17 +94,29 @@
     </style>
 
     <style name="BoldText">
-        <item name="android:fontFamily" />
+        <item name="android:fontFamily">@font/bold</item>
+        <item name="android:font" tools:targetApi="o">@font/bold</item>
     </style>
 
     <style name="RegularText">
-        <item name="android:fontFamily" />
-
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:font" tools:targetApi="o">@font/regular</item>
     </style>
 
     <style name="HistoryCardViewStyle">
         <item name="android:textColor">@color/gray_text</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ResultCardViewStyle" parent="RegularText">
+        <item name="android:textColor">@color/gray_text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ResultTextViewStyle" parent="RegularText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <style name="HistoryCorrectAnswers" parent="HistoryCardViewStyle">

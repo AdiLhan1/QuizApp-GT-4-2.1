@@ -43,4 +43,11 @@
     <dimen name="marginTop_32">32dp</dimen>
     <dimen name="marginStart_24">24dp</dimen>
     <dimen name="marginTop_29">29dp</dimen>
+    <dimen name="marginTop_25">25dp</dimen>
+    <dimen name="marginTop_90">90dp</dimen>
+    <dimen name="marginTop_52">52dp</dimen>
+    <dimen name="marginTop_22">22dp</dimen>
+    <dimen name="marginTop_81">81dp</dimen>
+    <dimen name="marginTop_100">100dp</dimen>
+    <dimen name="marginBottom_80">80dp</dimen>
 </resources>
