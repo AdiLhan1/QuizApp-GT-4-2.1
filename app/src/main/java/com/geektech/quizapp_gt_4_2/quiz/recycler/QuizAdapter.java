@@ -36,7 +36,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-        holder.onBind(questionsList.get(position).getQuestion());
+        holder.onBind(questionsList.get(position));
         Log.e("TAG", "onBindViewHolder: " + position);
     }
 
