@@ -1,6 +1,7 @@
 package com.geektech.quizapp_gt_4_2.quiz.recycler;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,11 +15,13 @@ import com.geektech.quizapp_gt_4_2.model.Question;
 public class QuizViewHolder extends RecyclerView.ViewHolder {
     private TextView name;
     private Listener listener;
+    private Button btn1;
     private LinearLayout multiple, single;
 
     public QuizViewHolder(@NonNull View itemView, Listener listener) {
         super(itemView);
         name = itemView.findViewById(R.id.itemTV_question);
+        btn1=itemView.findViewById(R.id.quiz_item_btn1);
         multiple = itemView.findViewById(R.id.quiz_linear_btnMultiple);
         single = itemView.findViewById(R.id.quiz_linear_btnSimple);
         this.listener = listener;
@@ -35,6 +38,7 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
             single.setVisibility(View.VISIBLE);
             multiple.setVisibility(View.INVISIBLE);
         }
+//        btn1.setText(question.getAnswers().get(0));
     }
 
     public interface Listener {

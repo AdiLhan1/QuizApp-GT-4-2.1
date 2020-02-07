@@ -30,7 +30,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private static final String EXTRA_CATEGORY = "category";
     private static final String EXTRA_DIFFICULTY = "difficulty";
     private int amount;
-    private int category;
+    private Integer category;
     private String difficulty;
     private RecyclerView recyclerView;
     private List<Question> questionsList = new ArrayList<>();
@@ -89,14 +89,22 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         Log.e("TAG", "___++____++__+_+ " + amount + " " + category + " " + difficulty);
         if (category == 8) {
             category = 0;
-            quizViewModel.getQuestions(amount, category, difficulty);
-            quizViewModel.question.observe(this, questions -> {
-                questionsList = questions;
-                adapter.updateQuestion(questions);
-                getPosition();
-            });
+            questionObserver();
+        } else {
+            questionObserver();
         }
+
     }
+
+    private void questionObserver() {
+        quizViewModel.getQuestions(amount, category, difficulty);
+        quizViewModel.question.observe(this, questions -> {
+            questionsList = questions;
+            adapter.updateQuestion(questions);
+            getPosition();
+        });
+    }
+
 
     private void getPosition() {
         quizViewModel.currentPosition.observe(this, integer -> {

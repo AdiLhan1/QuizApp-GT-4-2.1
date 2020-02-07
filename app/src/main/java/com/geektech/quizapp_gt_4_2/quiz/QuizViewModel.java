@@ -6,26 +6,33 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.geektech.quizapp_gt_4_2.App;
+import com.geektech.quizapp_gt_4_2.core.SingleLiveEvent;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.model.Question;
+import com.geektech.quizapp_gt_4_2.model.QuizResult;
 
+import java.util.Date;
 import java.util.List;
 
 public class QuizViewModel extends ViewModel {
     public MutableLiveData<List<Question>> question = new MutableLiveData<>();
     public MutableLiveData<Integer> currentPosition = new MutableLiveData<>();
+    private List<Question> mQuestions;
+
     private Integer count;
 
     public QuizViewModel() {
         currentPosition.setValue(1);
         count = 1;
     }
-
+    SingleLiveEvent<Integer> openResultEvent = new SingleLiveEvent<>();
+    SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
     public void getQuestions(int amount, Integer category, String difficulty) {
         App.quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> result) {
                 question.postValue(result);
+                Log.e("==========", result.get(0).getAnswers()+"");
             }
 
             @Override
@@ -33,6 +40,27 @@ public class QuizViewModel extends ViewModel {
                 Log.e("TAG", "onFailure: " + e);
             }
         });
+    }
+    private int getCorrectAnswersAmount() {
+        //TODO:
+        return 0;
+    }
+
+    void finishQuiz() {
+        QuizResult result = new QuizResult(
+                0,
+                "",
+                "",
+                mQuestions,
+                getCorrectAnswersAmount(),
+                new Date()
+        );
+
+        int resultId = App.historyStorage.saveQuizResult(result);
+
+        //TODO: Start Result activity
+        finishEvent.call();
+        openResultEvent.setValue(resultId);
     }
 
     @Override
