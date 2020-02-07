@@ -32,6 +32,8 @@ public class QuizViewModel extends ViewModel {
             @Override
             public void onSuccess(List<Question> result) {
                 question.postValue(result);
+                mQuestions=result;
+                question.setValue(mQuestions);
                 Log.e("==========", result.get(0).getAnswers()+"");
             }
 

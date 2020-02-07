@@ -1,5 +1,6 @@
 package com.geektech.quizapp_gt_4_2.quiz.recycler;
 
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -34,6 +35,8 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         if (question.getType() == EType.MULTIPLE) {
             multiple.setVisibility(View.VISIBLE);
             single.setVisibility(View.INVISIBLE);
+            btn1.setText(Html.fromHtml(
+                    question.getAnswers().get(0)));
         } else {
             single.setVisibility(View.VISIBLE);
             multiple.setVisibility(View.INVISIBLE);

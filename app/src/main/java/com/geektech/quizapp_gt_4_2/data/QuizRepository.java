@@ -26,27 +26,17 @@ public class QuizRepository implements IHistoryStorage, IQuizApiClient {
         historyStorage = storage;
     }
 
-    private Question shuffleAnswers(Question question) {
-        ArrayList<String> answers = new ArrayList<>();
-
-        answers.add(question.getCorrectAnswers());
-        answers.addAll(question.getIncorrectAnswers());
-
-        Collections.shuffle(answers);
-        question.setAnswers(answers);
-        Log.e("TAG", "shuffleAnswers: "+answers );
-        return question;
-    }
-
     @Override
     public void getQuestions(int amount, Integer category, String difficulty, QuestionsCallback callback) {
-        App.quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
+        quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> result) {
-                for (int i = 0; i < result.size(); i++) {
-                    Question q = result.get(i);
-                    result.set(i, shuffleAnswers(q));
-                    Log.e("TAG", "onSuccess:11111111 " + result.get(i));
+                for (Question answer : result){
+                    List<String>  answers = new ArrayList<>();
+                    answers.add(answer.getCorrectAnswers());
+                    answers.addAll(answer.getIncorrectAnswers());
+                    Collections.shuffle(answers);
+                    answer.setAnswers(answers);
                 }
                 Log.e("----------",  result+"");
                 callback.onSuccess(result);
