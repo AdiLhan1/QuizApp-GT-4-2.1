@@ -95,6 +95,16 @@ public class MainFragment extends CoreFragment {
                     category,
                     getDifficultyId());
         });
+        mViewModel.finishEvent.observe(this, aVoid -> {
+            Log.d("ololo", "Finish");
+        });
+
+        mViewModel.messageEvent.observe(this, message -> {
+            Log.d("ololo", "Meessage " + message);
+        });
+
+        mViewModel.callFinish();
+        mViewModel.onShowMessageClick();
     }
 
     private void setSpinners(String[] array, NiceSpinner spinner) {

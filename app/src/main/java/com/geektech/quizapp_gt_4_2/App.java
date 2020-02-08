@@ -15,13 +15,12 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        quizApiClient = new QuizApiClient();
-        historyStorage = new HistoryStorage();
-
         QuizRepository repository = new QuizRepository(
-                quizApiClient,
-                historyStorage
+                new QuizApiClient(),
+                new HistoryStorage()
         );
-    }
 
+        quizApiClient = repository;
+        historyStorage = repository;
+    }
 }

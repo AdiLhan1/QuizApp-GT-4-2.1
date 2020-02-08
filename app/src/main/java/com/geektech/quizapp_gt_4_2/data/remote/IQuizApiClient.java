@@ -9,6 +9,8 @@ import java.util.List;
 public interface IQuizApiClient {
     void getQuestions(int amount, Integer category, String difficulty, QuestionsCallback callback);
 
+//    void getQuestions(QuestionsCallback callback);
+
     void getCategories(CategoriesCallback callback);
 
     void getCountGlobal(CountGlobalCallback callback);

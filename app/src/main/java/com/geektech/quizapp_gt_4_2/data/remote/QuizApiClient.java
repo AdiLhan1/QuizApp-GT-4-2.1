@@ -40,6 +40,7 @@ public class QuizApiClient implements IQuizApiClient {
 
     }
 
+
     @Override
     public void getCategories(final CategoriesCallback callback) {
         final Call<QuizCategoriesResponse> call = client.getCategories();

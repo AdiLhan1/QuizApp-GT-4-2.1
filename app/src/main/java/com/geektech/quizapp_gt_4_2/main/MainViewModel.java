@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.geektech.quizapp_gt_4_2.App;
+import com.geektech.quizapp_gt_4_2.core.SingleLiveEvent;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.data.remote.QuizGlobalResponse;
 import com.geektech.quizapp_gt_4_2.data.remote.QuizQuestionCount;
@@ -22,6 +23,8 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<List<Category>> categoriesLiveData = new MutableLiveData<>();
     public MutableLiveData<QuizGlobalResponse> globalLiveData = new MutableLiveData<>();
     public MutableLiveData<QuizQuestionCount> questionCountLiveData = new MutableLiveData<>();
+    SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
+    SingleLiveEvent<String> messageEvent = new SingleLiveEvent<>();
 
     @Override
     protected void onCleared() {
@@ -71,6 +74,14 @@ public class MainViewModel extends ViewModel {
 
             }
         });
+    }
+
+    void callFinish() {
+        finishEvent.call();
+    }
+
+    void onShowMessageClick() {
+        messageEvent.setValue("Hello!");
     }
 
 

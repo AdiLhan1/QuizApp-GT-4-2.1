@@ -9,9 +9,9 @@ public class Question {
     private EType type;
     private String question;
     private EDifficulty difficulty;
-    @SerializedName("correctAnswers")
+    @SerializedName("correct_answer")
     private String correctAnswers;
-    @SerializedName("incorrectAnswers")
+    @SerializedName("incorrect_answers")
     private List<String> incorrectAnswers;
 
     private List<String> answers;

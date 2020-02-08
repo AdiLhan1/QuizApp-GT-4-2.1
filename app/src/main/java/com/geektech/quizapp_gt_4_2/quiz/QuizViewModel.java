@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 public class QuizViewModel extends ViewModel {
+    private IQuizApiClient quizApiClient = App.quizApiClient;
+
     public MutableLiveData<List<Question>> question = new MutableLiveData<>();
     public MutableLiveData<Integer> currentPosition = new MutableLiveData<>();
     private List<Question> mQuestions;
@@ -25,24 +27,30 @@ public class QuizViewModel extends ViewModel {
         currentPosition.setValue(1);
         count = 1;
     }
+
     SingleLiveEvent<Integer> openResultEvent = new SingleLiveEvent<>();
     SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
+
     public void getQuestions(int amount, Integer category, String difficulty) {
         App.quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> result) {
                 question.postValue(result);
-                mQuestions=result;
+                mQuestions = result;
                 question.setValue(mQuestions);
-                Log.e("==========", result.get(0).getAnswers()+"");
+                Log.e("TAG", "onSuccess: " + result.get(0).getAnswers());
+                Log.e("==========", result.get(0).getAnswers() + "");
             }
 
             @Override
             public void onFailure(Exception e) {
-                Log.e("TAG", "onFailure: " + e);
+
             }
         });
+
+        finishEvent.call();
     }
+
     private int getCorrectAnswersAmount() {
         //TODO:
         return 0;

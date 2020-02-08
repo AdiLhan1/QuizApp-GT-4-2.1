@@ -4,7 +4,6 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.data.history.IHistoryStorage;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.model.Question;
@@ -26,25 +25,32 @@ public class QuizRepository implements IHistoryStorage, IQuizApiClient {
         historyStorage = storage;
     }
 
+    private Question shuffleAnswers(Question question) {
+        ArrayList<String> answers = new ArrayList<>();
+
+        answers.add(question.getCorrectAnswers());
+        answers.addAll(question.getIncorrectAnswers());
+
+        Collections.shuffle(answers);
+        question.setAnswers(answers);
+        Log.e("TAG", "shuffleAnswers: " + answers);
+        return question;
+    }
+
     @Override
     public void getQuestions(int amount, Integer category, String difficulty, QuestionsCallback callback) {
-        quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
+        quizApiClient.getQuestions(amount, category, difficulty, new QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> result) {
-                for (Question answer : result){
-                    List<String>  answers = new ArrayList<>();
-                    answers.add(answer.getCorrectAnswers());
-                    answers.addAll(answer.getIncorrectAnswers());
-                    Collections.shuffle(answers);
-                    answer.setAnswers(answers);
+                for (int i = 0; i < result.size(); i++) {
+                    result.set(i, shuffleAnswers(result.get(i)));
+                    Log.e("TAG", "onSuccess:result " + result.get(i));
                 }
-                Log.e("----------",  result+"");
                 callback.onSuccess(result);
             }
 
             @Override
             public void onFailure(Exception e) {
-                Log.e("TAG", "onFailure: " + e);
                 callback.onFailure(e);
             }
         });

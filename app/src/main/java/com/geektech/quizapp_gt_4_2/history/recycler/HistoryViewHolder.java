@@ -26,6 +26,6 @@ public class HistoryViewHolder extends RecyclerView.ViewHolder {
         category.setText(historyList.get(pos).getCategoryName());
         answers.setText(historyList.get(pos).getCorrectAnswers());
         difficulty.setText(historyList.get(pos).getDifficulty());
-        date.setText(historyList.get(pos).getDate());
+        date.setText(String.valueOf(historyList.get(pos).getDate()));
     }
 }
