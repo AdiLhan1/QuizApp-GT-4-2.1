@@ -120,7 +120,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
 
     public void btn_skip_click(View view) {
         if (progressBar.getProgress() < amount) {
-            quizViewModel.nextPage();
+            quizViewModel.onSkipClick();
         } else {
             ResultActivity.start(this);
         }
@@ -128,7 +128,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
 
     public void btn_back_click(View view) {
         if (progressBar.getProgress() != 1) {
-            quizViewModel.prevPage();
+            quizViewModel.onBackPressed();
         } else {
             MainActivity.start(this);
             finish();
@@ -137,6 +137,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
 
     @Override
     public void onAnswerClick(int position, int selectedAnswerPosition) {
-
+        quizViewModel.onAnswerClick(position, selectedAnswerPosition);
     }
 }

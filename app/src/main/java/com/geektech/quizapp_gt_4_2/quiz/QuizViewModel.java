@@ -73,16 +73,41 @@ public class QuizViewModel extends ViewModel {
         openResultEvent.setValue(resultId);
     }
 
+    void onAnswerClick(int position, int selectedAnswerPosition) {
+        // 20, 19
+        // 20, 20
+        // 20, 21
+        // 20, -1
+
+        if (mQuestions.size() > position && position >= 0) {
+            mQuestions.get(position)
+                    .setSelectedAnswerPosition(selectedAnswerPosition);
+
+            question.setValue(mQuestions);
+
+            // 20, 17 -> 18
+            // 20, 18 -> 19
+            // 20, 19 -> 20
+            // 20, 20
+
+            if (position + 1 == mQuestions.size()) {
+                //TODO: Finish quiz
+            } else {
+                currentPosition.setValue(position + 1);
+            }
+        }
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
     }
 
-    public void nextPage() {
+    public void onSkipClick() {
         currentPosition.setValue(++count);
     }
 
-    public void prevPage() {
+    public void onBackPressed() {
         currentPosition.setValue(--count);
     }
 }

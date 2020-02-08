@@ -16,7 +16,7 @@ import com.geektech.quizapp_gt_4_2.model.Question;
 public class QuizViewHolder extends RecyclerView.ViewHolder {
     private TextView name;
     private Listener listener;
-    private Button btn1,btn2,btn3,btn4,btnTrue,btnFalse;
+    private Button btn1, btn2, btn3, btn4, btnTrue, btnFalse;
     private LinearLayout multiple, single;
 
     public QuizViewHolder(@NonNull View itemView, Listener listener) {
@@ -26,8 +26,8 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         btn2 = itemView.findViewById(R.id.quiz_item_btn2);
         btn3 = itemView.findViewById(R.id.quiz_item_btn3);
         btn4 = itemView.findViewById(R.id.quiz_item_btn4);
-        btnFalse=itemView.findViewById(R.id.quiz_item_false);
-        btnTrue=itemView.findViewById(R.id.quiz_item_true);
+        btnFalse = itemView.findViewById(R.id.quiz_item_false);
+        btnTrue = itemView.findViewById(R.id.quiz_item_true);
         multiple = itemView.findViewById(R.id.quiz_linear_btnMultiple);
         single = itemView.findViewById(R.id.quiz_linear_btnSimple);
         this.listener = listener;

@@ -10,10 +10,10 @@
         android:id="@+id/itemTV_question"
         style="@style/ItemQuizQuestionTVStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
-        android:paddingStart="20dp"
+        android:padding="10dp"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quiz_linear_btnMultiple"
-        android:layout_marginStart="40dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/itemTV_question"
         android:orientation="vertical">
         <Button
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:id="@+id/quiz_linear_btnSimple"
         android:orientation="vertical"
-        android:layout_marginStart="40dp"
+        android:gravity="center"
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/itemTV_question"
         android:layout_height="wrap_content">
