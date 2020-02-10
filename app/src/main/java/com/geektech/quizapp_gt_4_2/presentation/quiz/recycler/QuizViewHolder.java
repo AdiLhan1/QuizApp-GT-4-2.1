@@ -1,7 +1,9 @@
 package com.geektech.quizapp_gt_4_2.presentation.quiz.recycler;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -16,6 +18,7 @@ import com.geektech.quizapp_gt_4_2.model.Question;
 
 public class QuizViewHolder extends RecyclerView.ViewHolder {
     private TextView name;
+    private boolean check = false;
     private Listener listener;
     private Button btn1, btn2, btn3, btn4, btnTrue, btnFalse;
     private LinearLayout multiple, single;
@@ -65,7 +68,23 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
                     question.getAnswers().get(2)));
             btn4.setText(Html.fromHtml(
                     question.getAnswers().get(3)));
-            btn1.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
+            btn1.setOnClickListener(v -> {
+                listener.onAnswerClick(getAdapterPosition(), 0);
+                if (question.getAnswers().get(0).equals(question.getCorrectAnswers())) {
+                    Log.e("TAG", "onClick: " + question.getCorrectAnswers());
+                    check = true;
+                    btn1.setTextColor(Color.WHITE);
+                } else {
+                    check = false;
+//                    btn1.setBackgroundResource(R.color.colorRed);
+                    btn1.setTextColor(Color.WHITE);
+                }
+            });
+            if (check == true) {
+                btn1.setBackgroundResource(R.color.colorGreen);
+            } else {
+                btn1.setBackgroundResource(R.color.colorRed);
+            }
             btn2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
             btn3.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
             btn4.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
@@ -78,7 +97,12 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setBackgroundButtons() {
-        btn1.setTextColor(Color.GRAY);
+        Drawable buttonBackground = btn1.getBackground();
+        if (btn1.getBackground() == null) {
+            btn1.setTextColor(Color.GRAY);
+        } else {
+//            btn1.setBackgroundResource(buttonBackground);
+        }
         btn2.setTextColor(Color.GRAY);
         btn3.setTextColor(Color.GRAY);
         btn4.setTextColor(Color.GRAY);

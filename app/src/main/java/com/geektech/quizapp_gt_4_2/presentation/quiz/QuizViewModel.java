@@ -16,11 +16,13 @@ import java.util.List;
 
 public class QuizViewModel extends ViewModel {
     private IQuizApiClient quizApiClient = App.quizApiClient;
-
+    private String mCategory = "Mixed";
+    private String mDifficulty = "All";
+    private int correctAnswerAmounts = 0;
     public MutableLiveData<List<Question>> question = new MutableLiveData<>();
     public MutableLiveData<Integer> currentQuestionsPosition = new MutableLiveData<>();
     private List<Question> mQuestions;
-
+    private int id = 0;
     private Integer count;
 
     public QuizViewModel() {
@@ -37,6 +39,13 @@ public class QuizViewModel extends ViewModel {
             public void onSuccess(List<Question> result) {
                 mQuestions = result;
                 question.postValue(mQuestions);
+                ++id;
+                if (mQuestions.get(0).getCategory().equals(mQuestions.get(1).getCategory())) {
+                    mCategory = mQuestions.get(0).getCategory();
+                }
+                if (mQuestions.get(0).getDifficulty().equals(mQuestions.get(1).getDifficulty())) {
+                    mDifficulty = mQuestions.get(0).getDifficulty().toString();
+                }
             }
 
             @Override
@@ -49,15 +58,22 @@ public class QuizViewModel extends ViewModel {
     }
 
     private int getCorrectAnswersAmount() {
-        //TODO:
-        return 0;
+        for (int i = 0; i < mQuestions.size() - 1; i++) {
+            String correctAnswer = mQuestions.get(i).getCorrectAnswers();
+            String selectedAnswer = mQuestions.get(i).getAnswers()
+                    .get(mQuestions.get(i).getSelectedAnswerPosition());
+            if (selectedAnswer.equals(correctAnswer)) {
+                ++correctAnswerAmounts;
+            }
+        }
+        return correctAnswerAmounts;
     }
 
     void finishQuiz() {
         QuizResult result = new QuizResult(
-                0,
-                "",
-                "",
+                id,
+                mCategory,
+                mDifficulty,
                 mQuestions,
                 getCorrectAnswersAmount(),
                 new Date()
