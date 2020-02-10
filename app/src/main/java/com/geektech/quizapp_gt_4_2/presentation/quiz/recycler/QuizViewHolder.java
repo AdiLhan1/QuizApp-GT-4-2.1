@@ -1,5 +1,6 @@
 package com.geektech.quizapp_gt_4_2.presentation.quiz.recycler;
 
+import android.graphics.Color;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -33,10 +34,24 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         this.listener = listener;
 
         listener.onAnswerClick(getAdapterPosition(), 0);
+    }
 
+    private void setButton(Boolean enabled) {
+        btn1.setEnabled(enabled);
+        btn2.setEnabled(enabled);
+        btn3.setEnabled(enabled);
+        btn4.setEnabled(enabled);
+        btnTrue.setEnabled(enabled);
+        btnFalse.setEnabled(enabled);
     }
 
     public void onBind(Question question) {
+        if (question.getSelectedAnswerPosition() == null) {
+            setButton(true);
+        } else {
+            setButton(false);
+            setBackgroundButtons();
+        }
         name.setText(Html.fromHtml(
                 question.getQuestion()));
         if (question.getType() == EType.MULTIPLE) {
@@ -60,6 +75,15 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
             btnTrue.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 4));
             btnFalse.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 5));
         }
+    }
+
+    private void setBackgroundButtons() {
+        btn1.setTextColor(Color.GRAY);
+        btn2.setTextColor(Color.GRAY);
+        btn3.setTextColor(Color.GRAY);
+        btn4.setTextColor(Color.GRAY);
+        btnTrue.setTextColor(Color.GRAY);
+        btnFalse.setTextColor(Color.GRAY);
     }
 
     public interface Listener {

@@ -17,7 +17,7 @@
     </style>
 
     <style name="StyleButton">
-        <item name="android:background">@drawable/btn_stroke</item>
+        <item name="android:background">@drawable/stroke_btn</item>
         <item name="android:text">START</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">15sp</item>
