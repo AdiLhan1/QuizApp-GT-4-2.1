@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.quiz;
+package com.geektech.quizapp_gt_4_2.presentation.quiz;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,11 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.main.MainActivity;
 import com.geektech.quizapp_gt_4_2.model.Question;
-import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizAdapter;
-import com.geektech.quizapp_gt_4_2.quiz.recycler.QuizViewHolder;
-import com.geektech.quizapp_gt_4_2.result.ResultActivity;
+import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
+import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizAdapter;
+import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizViewHolder;
+import com.geektech.quizapp_gt_4_2.presentation.result.ResultActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private static final String EXTRA_DIFFICULTY = "difficulty";
     private int amount;
     private Integer category;
+    private Button btnSkip;
     private String difficulty;
     private RecyclerView recyclerView;
     private List<Question> questionsList = new ArrayList<>();
@@ -76,6 +78,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     }
 
     private void initViews() {
+        btnSkip = findViewById(R.id.btn_skip);
         recyclerView = findViewById(R.id.quiz_recyclerView);
         quizCategoryName = findViewById(R.id.quiz_categoryName);
         quizAmount = findViewById(R.id.quiz_amount);
@@ -86,7 +89,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         amount = getIntent().getIntExtra(EXTRA_AMOUNT, 10);
         category = getIntent().getIntExtra(EXTRA_CATEGORY, 21);
         difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
-        Log.e("TAG", "___++____++__+_+ " + amount + " " + category + " " + difficulty);
         if (category == 8) {
             category = 0;
             questionObserver();
@@ -106,15 +108,20 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void getPosition() {
-        quizViewModel.currentPosition.observe(this, integer -> {
-            recyclerView.scrollToPosition(integer - 1);
-            quizAmount.setText(integer + "/" + amount);
-            progressBar.setProgress(integer);
+        quizViewModel.currentQuestionsPosition.observe(this, integer -> {
+            Log.e("TAG", "getPosition: integer: " + integer);
+            recyclerView.scrollToPosition(integer);
+            quizAmount.setText(integer + 1 + "/" + amount);
+            progressBar.setProgress(integer + 1);
             progressBar.setMax(amount);
-            if (questionsList.size() > 0)
-                quizCategoryName.setText(questionsList.get(integer - 1).getCategory());
-            Log.e("порядок", "2");
+            quizCategoryName.setText(questionsList.get(integer).getCategory());
+            if (integer + 1 == questionsList.size()){
+                btnSkip.setText(R.string.finish);
+            }else {
+                btnSkip.setText(R.string.skip);
+            }
         });
     }
 

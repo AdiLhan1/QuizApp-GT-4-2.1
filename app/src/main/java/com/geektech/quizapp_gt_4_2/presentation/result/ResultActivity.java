@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.result;
+package com.geektech.quizapp_gt_4_2.presentation.result;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.main.MainActivity;
+import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
 
 public class ResultActivity extends AppCompatActivity {
     ResultViewModel resultViewModel;

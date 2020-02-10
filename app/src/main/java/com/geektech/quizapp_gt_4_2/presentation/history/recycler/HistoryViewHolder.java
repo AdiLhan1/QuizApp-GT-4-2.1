@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.history.recycler;
+package com.geektech.quizapp_gt_4_2.presentation.history.recycler;
 
 import android.view.View;
 import android.widget.TextView;

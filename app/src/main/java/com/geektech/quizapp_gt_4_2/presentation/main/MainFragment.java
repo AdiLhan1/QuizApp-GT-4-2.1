@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.main;
+package com.geektech.quizapp_gt_4_2.presentation.main;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
-import com.geektech.quizapp_gt_4_2.quiz.QuizActivity;
+import com.geektech.quizapp_gt_4_2.presentation.quiz.QuizActivity;
 import com.geektech.quizapp_gt_4_2.utils.SeekBarChangeHelper;
 
 import org.angmarch.views.NiceSpinner;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".quiz.QuizActivity">
+    tools:context=".presentation.quiz.QuizActivity">
 
     <ImageView
         android:src="@drawable/path"
@@ -61,6 +61,7 @@
         tools:listitem="@layout/quiz_item" />
 
     <Button
+        android:id="@+id/btn_skip"
         style="@style/ButtonSkipSyle"
         android:layout_width="90dp"
         android:layout_height="40dp"

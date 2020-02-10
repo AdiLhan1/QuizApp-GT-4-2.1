@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.main;
+package com.geektech.quizapp_gt_4_2.presentation.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.history.HistoryFragment;
-import com.geektech.quizapp_gt_4_2.settings.SettingsFragment;
+import com.geektech.quizapp_gt_4_2.presentation.history.HistoryFragment;
+import com.geektech.quizapp_gt_4_2.presentation.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;

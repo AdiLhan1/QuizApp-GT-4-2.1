@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.main;
+package com.geektech.quizapp_gt_4_2.presentation.main;
 
 import android.util.Log;
 

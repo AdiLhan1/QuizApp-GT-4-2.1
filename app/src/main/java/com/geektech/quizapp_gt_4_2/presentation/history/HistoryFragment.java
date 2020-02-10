@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.history;
+package com.geektech.quizapp_gt_4_2.presentation.history;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
-import com.geektech.quizapp_gt_4_2.history.recycler.HistoryAdapter;
 import com.geektech.quizapp_gt_4_2.model.History;
+import com.geektech.quizapp_gt_4_2.presentation.history.recycler.HistoryAdapter;
 
 import java.util.Date;
 
@@ -49,7 +49,7 @@ public class HistoryFragment extends CoreFragment {
     private void recyclerBuilder() {
         adapter = new HistoryAdapter();
         for (int i = 1; i < 10; i++) {
-            History history = new History("Mixed", "8/10", "Easy",new Date(),i);
+            History history = new History("Mixed", "8/10", "Easy", new Date(), i);
             adapter.add(history);
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

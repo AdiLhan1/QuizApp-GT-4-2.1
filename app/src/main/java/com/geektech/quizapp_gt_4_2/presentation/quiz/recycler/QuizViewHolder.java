@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.quiz.recycler;
+package com.geektech.quizapp_gt_4_2.presentation.quiz.recycler;
 
 import android.text.Html;
 import android.view.View;
@@ -33,6 +33,7 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         this.listener = listener;
 
         listener.onAnswerClick(getAdapterPosition(), 0);
+
     }
 
     public void onBind(Question question) {
@@ -49,15 +50,15 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
                     question.getAnswers().get(2)));
             btn4.setText(Html.fromHtml(
                     question.getAnswers().get(3)));
+            btn1.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
+            btn2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
+            btn3.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
+            btn4.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
         } else {
             single.setVisibility(View.VISIBLE);
             multiple.setVisibility(View.INVISIBLE);
-            btnTrue.setText(Html.fromHtml(
-                    question.getAnswers().get(0)
-            ));
-            btnFalse.setText(Html.fromHtml(
-                    question.getAnswers().get(1)
-            ));
+            btnTrue.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 4));
+            btnFalse.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 5));
         }
     }
 

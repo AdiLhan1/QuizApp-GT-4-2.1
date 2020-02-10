@@ -1,4 +1,4 @@
-package com.geektech.quizapp_gt_4_2.settings;
+package com.geektech.quizapp_gt_4_2.presentation.settings;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

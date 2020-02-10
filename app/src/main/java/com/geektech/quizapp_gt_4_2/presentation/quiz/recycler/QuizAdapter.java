@@ -1,6 +1,5 @@
-package com.geektech.quizapp_gt_4_2.quiz.recycler;
+package com.geektech.quizapp_gt_4_2.presentation.quiz.recycler;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
         holder.onBind(questionsList.get(position));
-        Log.e("TAG", "onBindViewHolder: " + position);
     }
 
     @Override

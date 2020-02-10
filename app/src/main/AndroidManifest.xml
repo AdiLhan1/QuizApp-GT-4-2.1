@@ -16,10 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".result.ResultActivity" />
-        <activity android:name=".quiz.QuizActivity" />
+        <activity android:name=".presentation.result.ResultActivity" />
+        <activity android:name=".presentation.quiz.QuizActivity" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:theme="@style/splashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
