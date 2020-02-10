@@ -143,6 +143,16 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     }
 
     @Override
+    public void onBackPressed() {
+        if (progressBar.getProgress()!=1){
+            quizViewModel.onBackPressed();
+        }else {
+            MainActivity.start(this);
+            finish();
+        }
+    }
+
+    @Override
     public void onAnswerClick(int position, int selectedAnswerPosition) {
         quizViewModel.onAnswerClick(position, selectedAnswerPosition);
     }
