@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class QuizRepository implements IHistoryStorage, IQuizApiClient {
+public abstract class QuizRepository implements IHistoryStorage, IQuizApiClient {
     private IQuizApiClient quizApiClient;
     private IHistoryStorage historyStorage;
 

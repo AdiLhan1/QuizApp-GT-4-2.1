@@ -19,24 +19,30 @@ public class QuizViewModel extends ViewModel {
     private String mCategory = "Mixed";
     private String mDifficulty = "All";
     private int correctAnswerAmounts = 0;
-    public MutableLiveData<List<Question>> question = new MutableLiveData<>();
-    public MutableLiveData<Integer> currentQuestionsPosition = new MutableLiveData<>();
     private List<Question> mQuestions;
     private int id = 0;
     private Integer count;
+
+    MutableLiveData<List<Question>> question = new MutableLiveData<>();
+    MutableLiveData<Integer> currentQuestionsPosition = new MutableLiveData<>();
+    MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
+    SingleLiveEvent<Integer> openResultEvent = new SingleLiveEvent<>();
+    SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
 
     public QuizViewModel() {
         currentQuestionsPosition.setValue(0);
         count = 0;
     }
 
-    SingleLiveEvent<Integer> openResultEvent = new SingleLiveEvent<>();
-    SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
 
     public void getQuestions(int amount, Integer category, String difficulty) {
+        isLoading.setValue(true);
+
         quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> result) {
+                isLoading.setValue(false);
                 mQuestions = result;
                 question.postValue(mQuestions);
                 ++id;
@@ -50,7 +56,8 @@ public class QuizViewModel extends ViewModel {
 
             @Override
             public void onFailure(Exception e) {
-
+                isLoading.setValue(false);
+                Log.e("TAG", "onFailure: " + e.getLocalizedMessage());
             }
         });
 
