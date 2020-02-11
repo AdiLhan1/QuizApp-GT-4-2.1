@@ -120,6 +120,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         quizViewModel.getQuestions(amount, category, difficulty);
         quizViewModel.question.observe(this, questions -> {
             questionsList = questions;
+            questionsList.get(0).setAnswered(false);
             adapter.updateQuestion(questions);
             getPosition();
         });

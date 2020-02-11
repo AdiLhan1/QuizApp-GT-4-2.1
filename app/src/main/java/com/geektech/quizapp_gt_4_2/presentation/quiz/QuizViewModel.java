@@ -30,9 +30,13 @@ public class QuizViewModel extends ViewModel {
     SingleLiveEvent<Integer> openResultEvent = new SingleLiveEvent<>();
     SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
 
+
     public QuizViewModel() {
         currentQuestionsPosition.setValue(0);
         count = 0;
+        if (mQuestions != null) {
+            mQuestions.get(currentQuestionsPosition.getValue()).setAnswered(false);
+        }
     }
 
 
@@ -71,6 +75,7 @@ public class QuizViewModel extends ViewModel {
                     .get(mQuestions.get(i).getSelectedAnswerPosition());
             if (selectedAnswer.equals(correctAnswer)) {
                 ++correctAnswerAmounts;
+                Log.e("------", "getCorrectAnswersAmount: "+correctAnswerAmounts);
             }
         }
         return correctAnswerAmounts;
@@ -85,6 +90,7 @@ public class QuizViewModel extends ViewModel {
                 getCorrectAnswersAmount(),
                 new Date()
         );
+        Log.e("-----", "finishQuiz: id:"+id +" category:"+mCategory +" difficulty:"+mDifficulty +" date:"+new Date());
 
         int resultId = App.historyStorage.saveQuizResult(result);
 
@@ -97,6 +103,7 @@ public class QuizViewModel extends ViewModel {
         if (mQuestions.size() > position && position >= 0) {
             mQuestions.get(position)
                     .setSelectedAnswerPosition(selectedAnswerPosition);
+            mQuestions.get(currentQuestionsPosition.getValue()).setAnswered(true);
             Log.e("TAG", "onAnswerClick setAnswer: " + position + selectedAnswerPosition);
 
             question.setValue(mQuestions);
@@ -115,6 +122,9 @@ public class QuizViewModel extends ViewModel {
     }
 
     public void onSkipClick() {
+        mQuestions.get(currentQuestionsPosition.getValue()).setSelectedAnswerPosition(6);
+        mQuestions.get(currentQuestionsPosition.getValue()).setAnswered(true);
+        question.setValue(mQuestions);
         currentQuestionsPosition.setValue(++count);
     }
 
