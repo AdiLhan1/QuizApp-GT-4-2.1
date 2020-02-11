@@ -7,72 +7,89 @@
     android:background="#fff"
     tools:context=".presentation.quiz.QuizActivity">
 
-    <ImageView
-        android:id="@+id/path"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:onClick="btn_back_click"
-        android:padding="5dp"
-        android:src="@drawable/ic_path"
-        app:layout_constraintBottom_toBottomOf="@id/quiz_categoryName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/quiz_categoryName" />
-
-    <TextView
-        android:id="@+id/quiz_categoryName"
-        style="@style/TVNameItemStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/path"
-        app:layout_constraintStart_toEndOf="@+id/path"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/quiz_amount"
-        style="@style/TVprogressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintLeft_toLeftOf="@+id/quiz_item_progressBar"
-        app:layout_constraintRight_toRightOf="@+id/quiz_item_progressBar"
-        app:layout_constraintTop_toBottomOf="@+id/quiz_item_progressBar" />
-
-    <ProgressBar
-        android:id="@+id/quiz_item_progressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="175dp"
-        android:layout_height="6dp"
-        android:layout_marginTop="29dp"
-        android:indeterminate="false"
-        android:max="10"
-        android:progress="1"
-        android:progressDrawable="@drawable/bg_progress_bar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quiz_categoryName" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/quiz_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/quiz_amount"
-        tools:listitem="@layout/quiz_item" />
-
-    <Button
-        android:id="@+id/btn_skip"
-        style="@style/ButtonSkipSyle"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="37dp"
-        android:onClick="btn_skip_click"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view_loading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="loading.json"
+        app:lottie_loop="true" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:onClick="btn_back_click"
+            android:padding="5dp"
+            android:src="@drawable/ic_path"
+            app:layout_constraintBottom_toBottomOf="@id/quiz_categoryName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/quiz_categoryName" />
+
+        <TextView
+            android:id="@+id/quiz_categoryName"
+            style="@style/TVNameItemStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/path"
+            app:layout_constraintStart_toEndOf="@+id/path"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/quiz_amount"
+            style="@style/TVprogressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintLeft_toLeftOf="@+id/quiz_item_progressBar"
+            app:layout_constraintRight_toRightOf="@+id/quiz_item_progressBar"
+            app:layout_constraintTop_toBottomOf="@+id/quiz_item_progressBar" />
+
+        <ProgressBar
+            android:id="@+id/quiz_item_progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="175dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="29dp"
+            android:indeterminate="false"
+            android:max="10"
+            android:progress="1"
+            android:progressDrawable="@drawable/bg_progress_bar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/quiz_categoryName" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/quiz_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/quiz_amount"
+            tools:listitem="@layout/quiz_item" />
+
+        <Button
+            android:id="@+id/btn_skip"
+            style="@style/ButtonSkipSyle"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="37dp"
+            android:onClick="btn_skip_click"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,4 +49,7 @@ dependencies {
     //NiceSpinner
     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 
+    //Lottie
+    implementation 'com.airbnb.android:lottie:3.3.1'
+
 }

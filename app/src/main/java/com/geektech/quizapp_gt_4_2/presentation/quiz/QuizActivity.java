@@ -11,10 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
@@ -35,8 +37,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private Button btnSkip;
     private String difficulty;
     private RecyclerView recyclerView;
+    private ConstraintLayout layout;
     private List<Question> questionsList = new ArrayList<>();
     private QuizAdapter adapter;
+    private LottieAnimationView lottieAnimationView;
     private TextView quizCategoryName, quizAmount;
     private int amountQuantity;
     private ProgressBar progressBar;
@@ -56,10 +60,22 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         setContentView(R.layout.activity_quiz);
         quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         initViews();
+        initLoading();
         getQuestions();
         recyclerBuilder();
         quizAmount.setText(amountQuantity + "/" + getIntent().getIntExtra(EXTRA_AMOUNT, 10));
         quizCategoryName.setText(getIntent().getStringExtra(EXTRA_CATEGORY));
+    }
+
+    private void initLoading() {
+        quizViewModel.isLoading.observe(this, aBoolean -> {
+            if (aBoolean) {
+                layout.setVisibility(View.INVISIBLE);
+            } else {
+                lottieAnimationView.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -78,6 +94,8 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     }
 
     private void initViews() {
+        lottieAnimationView = findViewById(R.id.animation_view_loading);
+        layout = findViewById(R.id.layout);
         btnSkip = findViewById(R.id.btn_skip);
         recyclerView = findViewById(R.id.quiz_recyclerView);
         quizCategoryName = findViewById(R.id.quiz_categoryName);
@@ -117,9 +135,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
             progressBar.setProgress(integer + 1);
             progressBar.setMax(amount);
             quizCategoryName.setText(questionsList.get(integer).getCategory());
-            if (integer + 1 == questionsList.size()){
+            if (integer + 1 == questionsList.size()) {
                 btnSkip.setText(R.string.finish);
-            }else {
+            } else {
                 btnSkip.setText(R.string.skip);
             }
         });
@@ -144,9 +162,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
 
     @Override
     public void onBackPressed() {
-        if (progressBar.getProgress()!=1){
+        if (progressBar.getProgress() != 1) {
             quizViewModel.onBackPressed();
-        }else {
+        } else {
             MainActivity.start(this);
             finish();
         }

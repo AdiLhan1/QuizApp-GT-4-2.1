@@ -23,7 +23,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         quizDatabase = Room.databaseBuilder(this,
                 QuizDatabase.class,
                 "quiz.db")
