@@ -20,14 +20,12 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     private Listener listener;
     private Button btn1, btn2, btn3, btn4, btnTrue, btnFalse;
     private LinearLayout multiple, single;
-    private Question question;
 
     public QuizViewHolder(@NonNull View itemView, Listener listener) {
         super(itemView);
         initViews(itemView);
         this.listener = listener;
         clickListener();
-        listener.onAnswerClick(getAdapterPosition(), 0);
     }
 
     private void clickListener() {
@@ -35,8 +33,8 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         btn2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
         btn3.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
         btn4.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
-        btnTrue.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 4));
-        btnFalse.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 5));
+        btnTrue.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
+        btnFalse.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
     }
 
     private void initViews(View itemView) {
@@ -61,12 +59,12 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBind(Question question) {
-        this.question = question;
+        defaultBackground();
         Log.e("-------", "clickListener: CORRECT ANSWER:" + question.getCorrectAnswers());
-        if (question.getSelectedAnswerPosition() != null) {
-            setButton(false);
-        } else {
+        if (question.getSelectedAnswerPosition() == null) {
             setButton(true);
+        } else {
+            setButton(false);
         }
         name.setText(Html.fromHtml(
                 question.getQuestion()));
@@ -82,9 +80,7 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
             multiple.setVisibility(View.INVISIBLE);
         }
         if (question.getSelectedAnswerPosition() != null) {
-            setBackgroundButtons();
-        } else {
-            defaultBackground();
+            setBackgroundButtons(question);
         }
     }
 
@@ -95,66 +91,62 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         btn4.setBackgroundResource(R.drawable.btn_style);
         btnTrue.setBackgroundResource(R.drawable.btn_style);
         btnFalse.setBackgroundResource(R.drawable.btn_style);
-        btn1.setTextColor(Color.BLACK);
-        btn2.setTextColor(Color.BLACK);
-        btn3.setTextColor(Color.BLACK);
-        btn4.setTextColor(Color.BLACK);
-        btnTrue.setTextColor(Color.BLACK);
-        btnFalse.setTextColor(Color.BLACK);
+        btn1.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        btn2.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        btn3.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        btn4.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        btnTrue.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        btnFalse.setTextColor(itemView.getResources().getColor(R.color.btn_color));
     }
 
-    private void setBackgroundButtons() {
-        switch (question.getSelectedAnswerPosition()) {
-            case 0:
-                if (question.getAnswers().get(0).equals(question.getCorrectAnswers())) {
-                    btn1.setBackgroundResource(R.drawable.btn_correct_answer);
-                } else {
-                    btn1.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                }
-                break;
-            case 1:
-                if (question.getAnswers().get(1).equals(question.getCorrectAnswers())) {
-                    btn2.setBackgroundResource(R.drawable.btn_correct_answer);
-                } else {
-                    btn2.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                }
-                break;
-            case 2:
-                if (question.getAnswers().get(2).equals(question.getCorrectAnswers())) {
-                    btn3.setBackgroundResource(R.drawable.btn_correct_answer);
-                } else {
-                    btn3.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                }
-                break;
-            case 3:
-                if (question.getAnswers().get(3).equals(question.getCorrectAnswers())) {
-                    btn4.setBackgroundResource(R.drawable.btn_correct_answer);
-                } else {
-                    btn4.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                }
-                break;
-            case 4:
-                if (btnTrue.getText().toString().equals(question.getCorrectAnswers())) {
-                    btnTrue.setBackgroundResource(R.drawable.btn_correct_answer);
-                } else {
-                    btnTrue.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                }
-                break;
-            case 5:
-                if (btnFalse.getText().toString().equals(question.getCorrectAnswers())) {
-                    btnFalse.setBackgroundResource(R.drawable.btn_correct_answer);
-                } else {
-                    btnFalse.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                }
-                break;
-            case 6:
-                btn1.setTextColor(Color.GRAY);
-                btn2.setTextColor(Color.GRAY);
-                btn3.setTextColor(Color.GRAY);
-                btn4.setTextColor(Color.GRAY);
-                btnTrue.setTextColor(Color.GRAY);
-                btnFalse.setTextColor(Color.GRAY);
-                break;
+    private void setBackgroundButtons(Question question) {
+        if (question.getSelectedAnswerPosition() != null) {
+            switch (question.getSelectedAnswerPosition()) {
+                case 0:
+                    if (question.getCorrectAnswers().equals(question.getAnswers().get(0))) {
+                        btn1.setBackgroundResource(R.drawable.btn_correct_answer);
+                        btnTrue.setBackgroundResource(R.drawable.btn_correct_answer);
+                        btn1.setTextColor(Color.WHITE);
+                        btnTrue.setTextColor(Color.WHITE);
+                    } else {
+                        btn1.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        btnTrue.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        btn1.setTextColor(Color.WHITE);
+                        btnTrue.setTextColor(Color.WHITE);
+                    }
+                    break;
+                case 1:
+                    if (question.getCorrectAnswers().equals(question.getAnswers().get(1))) {
+                        btn2.setBackgroundResource(R.drawable.btn_correct_answer);
+                        btnFalse.setBackgroundResource(R.drawable.btn_correct_answer);
+                        btn2.setTextColor(Color.WHITE);
+                        btnFalse.setTextColor(Color.WHITE);
+                    } else {
+                        btn2.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        btnFalse.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        btn2.setTextColor(Color.WHITE);
+                        btnFalse.setTextColor(Color.WHITE);
+                    }
+                    break;
+                case 2:
+                    if (question.getAnswers().get(2).equals(question.getCorrectAnswers())) {
+                        btn3.setBackgroundResource(R.drawable.btn_correct_answer);
+                        btn3.setTextColor(Color.WHITE);
+                    } else {
+                        btn3.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        btn3.setTextColor(Color.WHITE);
+                    }
+                    break;
+                case 3:
+                    if (question.getAnswers().get(3).equals(question.getCorrectAnswers())) {
+                        btn4.setBackgroundResource(R.drawable.btn_correct_answer);
+                        btn4.setTextColor(Color.WHITE);
+                    } else {
+                        btn4.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        btn4.setTextColor(Color.WHITE);
+                    }
+                    break;
+            }
         }
     }
 

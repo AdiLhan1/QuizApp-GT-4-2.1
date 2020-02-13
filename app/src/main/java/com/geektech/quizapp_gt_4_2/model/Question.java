@@ -14,8 +14,6 @@ public class Question {
     @SerializedName("incorrect_answers")
     private List<String> incorrectAnswers;
 
-    private boolean isAnswered;
-
     private List<String> answers;
 
     private Integer selectedAnswerPosition;
@@ -47,15 +45,6 @@ public class Question {
         this.correctAnswers = correctAnswers;
         this.incorrectAnswers = incorrectAnswers;
     }
-
-    public Boolean getAnswered() {
-        return isAnswered;
-    }
-
-    public void setAnswered(Boolean answered) {
-        isAnswered = answered;
-    }
-
     public String getCategory() {
         return category;
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +43,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private QuizAdapter adapter;
     private LottieAnimationView lottieAnimationView;
     private TextView quizCategoryName, quizAmount;
-    private int amountQuantity;
     private ProgressBar progressBar;
 
     public static void start(Context context, Integer amount, Integer category, String difficulty) {
@@ -63,8 +63,15 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         initLoading();
         getQuestions();
         recyclerBuilder();
-        quizAmount.setText(amountQuantity + "/" + getIntent().getIntExtra(EXTRA_AMOUNT, 10));
-        quizCategoryName.setText(getIntent().getStringExtra(EXTRA_CATEGORY));
+        quizViewModel.finishEvent.observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(Void aVoid) {
+                finish();
+            }
+        });
+        quizViewModel.openResultEvent.observe(this, integer ->
+                ResultActivity.start(QuizActivity.this,integer)
+        );
     }
 
     private void initLoading() {
@@ -120,7 +127,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         quizViewModel.getQuestions(amount, category, difficulty);
         quizViewModel.question.observe(this, questions -> {
             questionsList = questions;
-            questionsList.get(0).setAnswered(false);
             adapter.updateQuestion(questions);
             getPosition();
         });
@@ -148,7 +154,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         if (progressBar.getProgress() < amount) {
             quizViewModel.onSkipClick();
         } else {
-            ResultActivity.start(this);
+           quizViewModel.finishEvent.call();
         }
     }
 
@@ -156,7 +162,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         if (progressBar.getProgress() != 1) {
             quizViewModel.onBackPressed();
         } else {
-            MainActivity.start(this);
             finish();
         }
     }
@@ -166,7 +171,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         if (progressBar.getProgress() != 1) {
             quizViewModel.onBackPressed();
         } else {
-            MainActivity.start(this);
             finish();
         }
     }

@@ -33,7 +33,7 @@ public class HistoryStorage implements IHistoryStorage {
 
     @Override
     public LiveData<List<History>> getAllHistory() {
-        Transformations.map(getAll(), quizResults -> {
+       return Transformations.map(getAll(), quizResults -> {
             ArrayList<History> histories = new ArrayList<>();
 
             for (QuizResult quizResult : quizResults) {
@@ -48,7 +48,6 @@ public class HistoryStorage implements IHistoryStorage {
             }
             return histories;
         });
-        return null;
     }
 
     @Override
