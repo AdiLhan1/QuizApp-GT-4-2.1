@@ -112,11 +112,22 @@ public class QuizViewModel extends ViewModel {
     }
 
     public void onSkipClick() {
-        question.setValue(mQuestions);
-        onAnswerClick(currentQuestionsPosition.getValue(), -1);
+        Integer currentPosition = currentQuestionsPosition.getValue();
+        if (currentPosition != null) {
+            onAnswerClick(currentQuestionsPosition.getValue(), -1);
+        } else {
+            finishQuiz();
+        }
     }
 
     public void onBackPressed() {
-        currentQuestionsPosition.setValue(--count);
+        Integer currentPosition = currentQuestionsPosition.getValue();
+        if (currentPosition != null) {
+            if (currentPosition != 0) {
+                currentQuestionsPosition.setValue(--count);
+            }
+        } else {
+            finishEvent.call();
+        }
     }
 }

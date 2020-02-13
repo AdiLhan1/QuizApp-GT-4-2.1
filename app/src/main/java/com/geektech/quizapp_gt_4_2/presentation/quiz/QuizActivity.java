@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.Question;
-import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizAdapter;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizViewHolder;
 import com.geektech.quizapp_gt_4_2.presentation.result.ResultActivity;
@@ -63,14 +61,9 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         initLoading();
         getQuestions();
         recyclerBuilder();
-        quizViewModel.finishEvent.observe(this, new Observer<Void>() {
-            @Override
-            public void onChanged(Void aVoid) {
-                finish();
-            }
-        });
+        quizViewModel.finishEvent.observe(this, aVoid -> finish());
         quizViewModel.openResultEvent.observe(this, integer ->
-                ResultActivity.start(QuizActivity.this,integer)
+                ResultActivity.start(QuizActivity.this, integer)
         );
     }
 
@@ -151,28 +144,17 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     }
 
     public void btn_skip_click(View view) {
-        if (progressBar.getProgress() < amount) {
-            quizViewModel.onSkipClick();
-        } else {
-           quizViewModel.finishEvent.call();
-        }
+        quizViewModel.onSkipClick();
+
     }
 
     public void btn_back_click(View view) {
-        if (progressBar.getProgress() != 1) {
-            quizViewModel.onBackPressed();
-        } else {
-            finish();
-        }
+        quizViewModel.onBackPressed();
     }
 
     @Override
     public void onBackPressed() {
-        if (progressBar.getProgress() != 1) {
-            quizViewModel.onBackPressed();
-        } else {
-            finish();
-        }
+        quizViewModel.onBackPressed();
     }
 
     @Override

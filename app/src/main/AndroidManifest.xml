@@ -20,6 +20,7 @@
         <activity android:name=".presentation.quiz.QuizActivity" />
         <activity
             android:name=".presentation.main.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/splashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
