@@ -40,8 +40,7 @@
     </style>
 
     <style name="SpinnerStyle">
-        <item name="android:layout_width">240dp</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:background">#FC89FA </item>
     </style>
 
 

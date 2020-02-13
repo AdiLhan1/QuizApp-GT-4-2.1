@@ -143,12 +143,12 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         });
     }
 
-    public void btn_skip_click(View view) {
+    public void btnSkipClick(View view) {
         quizViewModel.onSkipClick();
 
     }
 
-    public void btn_back_click(View view) {
+    public void buttonOnBackPressed(View view) {
         quizViewModel.onBackPressed();
     }
 

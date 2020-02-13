@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCF9F9"
     tools:context=".presentation.main.MainFragment">
 
     <ImageView
@@ -70,12 +69,16 @@
     <org.angmarch.views.NiceSpinner
         android:id="@+id/category_spinner"
         style="@style/SpinnerStyle"
+        android:layout_height="48dp"
+        android:layout_width="240dp"
         android:layout_marginTop="@dimen/spinner_marginTop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/category_text_view" />
 
     <org.angmarch.views.NiceSpinner
+        android:layout_height="48dp"
+        android:layout_width="240dp"
         android:id="@+id/difficulty_spinner"
         style="@style/SpinnerStyle"
         android:layout_marginTop="@dimen/spinner_marginTop"
