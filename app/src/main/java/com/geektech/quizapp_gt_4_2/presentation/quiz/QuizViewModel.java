@@ -94,10 +94,11 @@ public class QuizViewModel extends ViewModel {
 
     void onAnswerClick(int position, int selectedAnswerPosition) {
         if (mQuestions.size() > position && position >= 0) {
-            mQuestions.get(position).setSelectedAnswerPosition(selectedAnswerPosition);
-            Log.e("TAG", "onAnswerClick setAnswer: " + position + selectedAnswerPosition);
-            question.setValue(mQuestions);
-
+            if (mQuestions.get(position).getSelectedAnswerPosition() == null) {
+                mQuestions.get(position).setSelectedAnswerPosition(selectedAnswerPosition);
+                Log.e("TAG", "onAnswerClick setAnswer: " + position + selectedAnswerPosition);
+                question.setValue(mQuestions);
+            }
             if (position + 1 == mQuestions.size()) {
                 finishQuiz();
             } else {
