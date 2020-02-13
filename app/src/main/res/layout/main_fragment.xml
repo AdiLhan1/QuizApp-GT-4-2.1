@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F2F2"
+    android:background="#FCF9F9"
     tools:context=".presentation.main.MainFragment">
 
     <ImageView
