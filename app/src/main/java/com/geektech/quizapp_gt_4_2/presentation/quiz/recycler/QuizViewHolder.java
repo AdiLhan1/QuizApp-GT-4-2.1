@@ -18,8 +18,8 @@ import com.geektech.quizapp_gt_4_2.model.Question;
 public class QuizViewHolder extends RecyclerView.ViewHolder {
     private TextView name;
     private Listener listener;
-    private Button btn1, btn2, btn3, btn4, btnTrue, btnFalse;
-    private LinearLayout multiple, single;
+    private Button multipleButton1, multipleButton2, multipleButton3, multipleButton4, booleanBtnTrue, booleanBtnFalse;
+    private LinearLayout buttonMultiple, booleanButtons;
 
     public QuizViewHolder(@NonNull View itemView, Listener listener) {
         super(itemView);
@@ -29,33 +29,33 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void clickListener() {
-        btn1.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
-        btn2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
-        btn3.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
-        btn4.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
-        btnTrue.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
-        btnFalse.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
+        multipleButton1.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
+        multipleButton2.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
+        multipleButton3.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 2));
+        multipleButton4.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 3));
+        booleanBtnTrue.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 0));
+        booleanBtnFalse.setOnClickListener(v -> listener.onAnswerClick(getAdapterPosition(), 1));
     }
 
     private void initViews(View itemView) {
         name = itemView.findViewById(R.id.itemTV_question);
-        btn1 = itemView.findViewById(R.id.quiz_item_btn1);
-        btn2 = itemView.findViewById(R.id.quiz_item_btn2);
-        btn3 = itemView.findViewById(R.id.quiz_item_btn3);
-        btn4 = itemView.findViewById(R.id.quiz_item_btn4);
-        btnFalse = itemView.findViewById(R.id.quiz_item_false);
-        btnTrue = itemView.findViewById(R.id.quiz_item_true);
-        multiple = itemView.findViewById(R.id.quiz_linear_btnMultiple);
-        single = itemView.findViewById(R.id.quiz_linear_btnSimple);
+        multipleButton1 = itemView.findViewById(R.id.quiz_item_btn1);
+        multipleButton2 = itemView.findViewById(R.id.quiz_item_btn2);
+        multipleButton3 = itemView.findViewById(R.id.quiz_item_btn3);
+        multipleButton4 = itemView.findViewById(R.id.quiz_item_btn4);
+        booleanBtnFalse = itemView.findViewById(R.id.quiz_item_false);
+        booleanBtnTrue = itemView.findViewById(R.id.quiz_item_true);
+        buttonMultiple = itemView.findViewById(R.id.quiz_linear_btnMultiple);
+        booleanButtons = itemView.findViewById(R.id.quiz_linear_btnSimple);
     }
 
     private void setButton(Boolean enabled) {
-        btn1.setEnabled(enabled);
-        btn2.setEnabled(enabled);
-        btn3.setEnabled(enabled);
-        btn4.setEnabled(enabled);
-        btnTrue.setEnabled(enabled);
-        btnFalse.setEnabled(enabled);
+        multipleButton1.setEnabled(enabled);
+        multipleButton2.setEnabled(enabled);
+        multipleButton3.setEnabled(enabled);
+        multipleButton4.setEnabled(enabled);
+        booleanBtnTrue.setEnabled(enabled);
+        booleanBtnFalse.setEnabled(enabled);
     }
 
     public void onBind(Question question) {
@@ -69,23 +69,28 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         name.setText(Html.fromHtml(
                 question.getQuestion()));
         if (question.getType() == EType.MULTIPLE) {
-            multiple.setVisibility(View.VISIBLE);
-            single.setVisibility(View.INVISIBLE);
-            btn1.setText(Html.fromHtml(question.getAnswers().get(0)));
-            btn2.setText(Html.fromHtml(question.getAnswers().get(1)));
-            btn3.setText(Html.fromHtml(question.getAnswers().get(2)));
-            btn4.setText(Html.fromHtml(question.getAnswers().get(3)));
+            buttonMultiple.setVisibility(View.VISIBLE);
+            booleanButtons.setVisibility(View.INVISIBLE);
+            setTextButtons(question, multipleButton1, multipleButton2, multipleButton3, multipleButton4);
         } else {
-            single.setVisibility(View.VISIBLE);
-            multiple.setVisibility(View.INVISIBLE);
+            booleanButtons.setVisibility(View.VISIBLE);
+            buttonMultiple.setVisibility(View.INVISIBLE);
         }
         if (question.getSelectedAnswerPosition() != null) {
             setSelected(question);
         }
     }
 
+    private void setTextButtons(Question question, Button... buttons) {
+        int i = 0;
+        for (Button button : buttons) {
+            button.setText(Html.fromHtml(question.getAnswers().get(i)));
+            i++;
+        }
+    }
+
     private void resetButtons() {
-        resetAnswerButtons(btn1, btn2, btn3, btn4, btnTrue, btnFalse);
+        resetAnswerButtons(multipleButton1, multipleButton2, multipleButton3, multipleButton4, booleanBtnTrue, booleanBtnFalse);
     }
 
     private void resetAnswerButtons(Button... buttons) {
@@ -100,46 +105,46 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
             switch (question.getSelectedAnswerPosition()) {
                 case 0:
                     if (question.getCorrectAnswers().equals(question.getAnswers().get(0))) {
-                        btn1.setBackgroundResource(R.drawable.btn_correct_answer);
-                        btnTrue.setBackgroundResource(R.drawable.btn_correct_answer);
-                        btn1.setTextColor(Color.WHITE);
-                        btnTrue.setTextColor(Color.WHITE);
+                        multipleButton1.setBackgroundResource(R.drawable.btn_correct_answer);
+                        booleanBtnTrue.setBackgroundResource(R.drawable.btn_correct_answer);
+                        multipleButton1.setTextColor(Color.WHITE);
+                        booleanBtnTrue.setTextColor(Color.WHITE);
                     } else {
-                        btn1.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                        btnTrue.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                        btn1.setTextColor(Color.WHITE);
-                        btnTrue.setTextColor(Color.WHITE);
+                        multipleButton1.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        booleanBtnTrue.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        multipleButton1.setTextColor(Color.WHITE);
+                        booleanBtnTrue.setTextColor(Color.WHITE);
                     }
                     break;
                 case 1:
                     if (question.getCorrectAnswers().equals(question.getAnswers().get(1))) {
-                        btn2.setBackgroundResource(R.drawable.btn_correct_answer);
-                        btnFalse.setBackgroundResource(R.drawable.btn_correct_answer);
-                        btn2.setTextColor(Color.WHITE);
-                        btnFalse.setTextColor(Color.WHITE);
+                        multipleButton2.setBackgroundResource(R.drawable.btn_correct_answer);
+                        booleanBtnFalse.setBackgroundResource(R.drawable.btn_correct_answer);
+                        multipleButton2.setTextColor(Color.WHITE);
+                        booleanBtnFalse.setTextColor(Color.WHITE);
                     } else {
-                        btn2.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                        btnFalse.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                        btn2.setTextColor(Color.WHITE);
-                        btnFalse.setTextColor(Color.WHITE);
+                        multipleButton2.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        booleanBtnFalse.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        multipleButton2.setTextColor(Color.WHITE);
+                        booleanBtnFalse.setTextColor(Color.WHITE);
                     }
                     break;
                 case 2:
                     if (question.getAnswers().get(2).equals(question.getCorrectAnswers())) {
-                        btn3.setBackgroundResource(R.drawable.btn_correct_answer);
-                        btn3.setTextColor(Color.WHITE);
+                        multipleButton3.setBackgroundResource(R.drawable.btn_correct_answer);
+                        multipleButton3.setTextColor(Color.WHITE);
                     } else {
-                        btn3.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                        btn3.setTextColor(Color.WHITE);
+                        multipleButton3.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        multipleButton3.setTextColor(Color.WHITE);
                     }
                     break;
                 case 3:
                     if (question.getAnswers().get(3).equals(question.getCorrectAnswers())) {
-                        btn4.setBackgroundResource(R.drawable.btn_correct_answer);
-                        btn4.setTextColor(Color.WHITE);
+                        multipleButton4.setBackgroundResource(R.drawable.btn_correct_answer);
+                        multipleButton4.setTextColor(Color.WHITE);
                     } else {
-                        btn4.setBackgroundResource(R.drawable.btn_incorrect_answer);
-                        btn4.setTextColor(Color.WHITE);
+                        multipleButton4.setBackgroundResource(R.drawable.btn_incorrect_answer);
+                        multipleButton4.setTextColor(Color.WHITE);
                     }
                     break;
             }
