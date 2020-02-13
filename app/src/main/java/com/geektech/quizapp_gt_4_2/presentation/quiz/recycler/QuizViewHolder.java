@@ -59,7 +59,7 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBind(Question question) {
-        defaultBackground();
+        resetButtons();
         Log.e("-------", "clickListener: CORRECT ANSWER:" + question.getCorrectAnswers());
         if (question.getSelectedAnswerPosition() == null) {
             setButton(true);
@@ -80,26 +80,22 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
             multiple.setVisibility(View.INVISIBLE);
         }
         if (question.getSelectedAnswerPosition() != null) {
-            setBackgroundButtons(question);
+            setSelected(question);
         }
     }
 
-    private void defaultBackground() {
-        btn1.setBackgroundResource(R.drawable.btn_style);
-        btn2.setBackgroundResource(R.drawable.btn_style);
-        btn3.setBackgroundResource(R.drawable.btn_style);
-        btn4.setBackgroundResource(R.drawable.btn_style);
-        btnTrue.setBackgroundResource(R.drawable.btn_style);
-        btnFalse.setBackgroundResource(R.drawable.btn_style);
-        btn1.setTextColor(itemView.getResources().getColor(R.color.btn_color));
-        btn2.setTextColor(itemView.getResources().getColor(R.color.btn_color));
-        btn3.setTextColor(itemView.getResources().getColor(R.color.btn_color));
-        btn4.setTextColor(itemView.getResources().getColor(R.color.btn_color));
-        btnTrue.setTextColor(itemView.getResources().getColor(R.color.btn_color));
-        btnFalse.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+    private void resetButtons() {
+        resetAnswerButtons(btn1, btn2, btn3, btn4, btnTrue, btnFalse);
     }
 
-    private void setBackgroundButtons(Question question) {
+    private void resetAnswerButtons(Button... buttons) {
+        for (Button button : buttons) {
+            button.setBackgroundResource(R.drawable.btn_style);
+            button.setTextColor(itemView.getResources().getColor(R.color.btn_color));
+        }
+    }
+
+    private void setSelected(Question question) {
         if (question.getSelectedAnswerPosition() != null) {
             switch (question.getSelectedAnswerPosition()) {
                 case 0:
