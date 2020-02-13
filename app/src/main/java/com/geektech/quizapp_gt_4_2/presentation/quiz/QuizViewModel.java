@@ -126,6 +126,8 @@ public class QuizViewModel extends ViewModel {
         if (currentPosition != null) {
             if (currentPosition != 0) {
                 currentQuestionsPosition.setValue(--count);
+            } else {
+                finishEvent.call();
             }
         } else {
             finishEvent.call();
