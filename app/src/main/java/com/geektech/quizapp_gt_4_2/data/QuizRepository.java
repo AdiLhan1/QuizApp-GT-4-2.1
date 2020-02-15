@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.geektech.quizapp_gt_4_2.data.history.IHistoryStorage;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
+import com.geektech.quizapp_gt_4_2.model.History;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class QuizRepository implements IHistoryStorage, IQuizApiClient {
+public class QuizRepository implements IHistoryStorage, IQuizApiClient {
     private IQuizApiClient quizApiClient;
     private IHistoryStorage historyStorage;
 
@@ -58,27 +59,32 @@ public abstract class QuizRepository implements IHistoryStorage, IQuizApiClient 
 
     @Override
     public QuizResult getQuizResult(int id) {
-        return null;
+        return historyStorage.getQuizResult(id);
     }
 
     @Override
     public int saveQuizResult(QuizResult quizResult) {
-        return 0;
+        return historyStorage.saveQuizResult(quizResult);
     }
 
     @Override
-    public LiveData<List<QuizResult>> getAll() {
-        return null;
+    public LiveData<List<History>> getAllHistory() {
+        return historyStorage.getAllHistory();
     }
 
     @Override
-    public void delete(int id) {
-        historyStorage.delete(id);
+    public void delete(QuizResult quizResult) {
+
     }
 
     @Override
     public void deleteAll() {
 
+    }
+
+    @Override
+    public LiveData<List<QuizResult>> getAll() {
+        return null;
     }
 
     @Override

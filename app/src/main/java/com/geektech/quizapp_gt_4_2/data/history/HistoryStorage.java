@@ -33,30 +33,30 @@ public class HistoryStorage implements IHistoryStorage {
 
     @Override
     public LiveData<List<History>> getAllHistory() {
-       return Transformations.map(getAll(), quizResults -> {
+        return Transformations.map(getAll(), quizResults -> {
             ArrayList<History> histories = new ArrayList<>();
 
-            for (QuizResult quizResult : quizResults) {
-                String category = quizResult.getQuestions().get(0).getCategory();
-
-//                shortQuizResults.add(new History(
-//                        quizResult.getQuestions().size(),
-//                        quizResult.getCorrectAnswersAmount(),
-//                        quizResult.getCreatedAt(),
-//                        quizResult.getId()
-//                        ));
+            if (quizResults.size() > 0) {
+                for (int i = 0; i < quizResults.size(); i++) {
+                    histories.add(i, new History(quizResults.get(i).getId(),
+                            quizResults.get(i).getCategory(),
+                            quizResults.get(i).getCorrectAnswersAmount(),
+                            quizResults.get(i).getDifficulty(),
+                            quizResults.get(i).getQuestions().size(),
+                            quizResults.get(i).getCreatedAt()));
+                }
             }
             return histories;
         });
     }
 
     @Override
-    public void delete(int id) {
-        //TODO Delete by id
+    public void delete(QuizResult quizResult) {
+        dao.delete(quizResult);
     }
+
 
     @Override
     public void deleteAll() {
-        //TODO Delete All
     }
 }

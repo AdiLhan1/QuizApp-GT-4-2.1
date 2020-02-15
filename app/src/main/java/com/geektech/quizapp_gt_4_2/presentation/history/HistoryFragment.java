@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
-import com.geektech.quizapp_gt_4_2.model.History;
 import com.geektech.quizapp_gt_4_2.presentation.history.recycler.HistoryAdapter;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 public class HistoryFragment extends CoreFragment {
 
@@ -35,24 +34,25 @@ public class HistoryFragment extends CoreFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.history_recycler_view);
+        recyclerBuilder();
+        adapter.updateHistory(new ArrayList<>());
 
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
-        // TODO: Use the ViewModel
-        recyclerBuilder();
+        mViewModel = ViewModelProviders.of(getActivity()).get(HistoryViewModel.class);
+        mViewModel.history.observe(getActivity(), histories -> {
+            if (histories != null) {
+                adapter.updateHistory(histories);
+            }
+        });
     }
 
     private void recyclerBuilder() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
         adapter = new HistoryAdapter();
-        for (int i = 1; i < 10; i++) {
-            History history = new History("Mixed", "8/10", "Easy", new Date(), i);
-            adapter.add(history);
-        }
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }
 }

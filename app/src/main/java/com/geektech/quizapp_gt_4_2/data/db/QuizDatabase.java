@@ -6,8 +6,9 @@ import androidx.room.RoomDatabase;
 import com.geektech.quizapp_gt_4_2.data.history.HistoryDao;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
 
-@Database(entities =
-        {QuizResult.class},version = 1,exportSchema = false)
+@Database(entities = {QuizResult.class},
+        version = 2,
+        exportSchema = false)
 public abstract class QuizDatabase extends RoomDatabase {
     public abstract HistoryDao historyDao();
 }

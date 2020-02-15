@@ -24,7 +24,7 @@
         android:layout_marginTop="29dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/history_title"
-        tools:listitem="@layout/history_view_holder" />
+        tools:listitem="@layout/history_item" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

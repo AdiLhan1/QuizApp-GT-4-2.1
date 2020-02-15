@@ -1,5 +1,6 @@
 package com.geektech.quizapp_gt_4_2.presentation.history.recycler;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.model.History;
 
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HistoryViewHolder extends RecyclerView.ViewHolder {
-    TextView category, answers, difficulty, date;
+    private TextView category, answers, difficulty, date;
 
     public HistoryViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -22,10 +24,11 @@ public class HistoryViewHolder extends RecyclerView.ViewHolder {
         date = itemView.findViewById(R.id.history_date);
     }
 
-    public void onBind(ArrayList<History> historyList, int pos) {
-        category.setText(historyList.get(pos).getCategoryName());
-        answers.setText(historyList.get(pos).getCorrectAnswers());
-        difficulty.setText(historyList.get(pos).getDifficulty());
-        date.setText(String.valueOf(historyList.get(pos).getDate()));
+    public void onBind(History history) {
+        Log.e("TAG", "onBind: " + history.getCategoryName());
+        category.setText(history.getCategoryName());
+        answers.setText(history.getCorrectAnswers() + "/" + history.getAmount());
+        difficulty.setText(history.getDifficulty());
+        date.setText(String.valueOf(history.getDate().toString()));
     }
 }

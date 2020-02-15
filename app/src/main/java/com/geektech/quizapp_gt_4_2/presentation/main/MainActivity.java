@@ -70,7 +70,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return Fragment.get(position);
+            Fragment fragment;
+            switch (position) {
+                case 0:
+                    fragment = MainFragment.newInstance();
+                    break;
+                case 1:
+                    fragment = HistoryFragment.newInstance();
+                    break;
+                default:
+                    fragment = SettingsFragment.newInstance();
+                    break;
+            }
+
+            return fragment;
         }
 
         @Override

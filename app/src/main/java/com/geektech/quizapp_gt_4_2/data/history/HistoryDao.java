@@ -13,7 +13,6 @@ import java.util.List;
 
 @Dao
 public interface HistoryDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(QuizResult quizResult);
 
@@ -25,5 +24,6 @@ public interface HistoryDao {
 
     @Query("SELECT * FROM quiz_result")
     LiveData<List<QuizResult>> getAll();
+
 
 }

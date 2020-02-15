@@ -57,7 +57,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvResult_difficulty"
             style="@style/ResultCardViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,7 +83,7 @@
             android:text="Result:" />
 
         <TextView
-            android:id="@+id/tvResult_difficulty2"
+            android:id="@+id/tvResult_difficulty"
             style="ResultTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +101,7 @@
             android:text="8/10" />
 
         <TextView
-            android:id="@+id/tv_result2"
+            android:id="@+id/tv_percent"
             style="ResultTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +118,7 @@
         android:layout_marginBottom="@dimen/marginBottom_80"
         android:background="@drawable/rounded_btn_green"
         android:text="Finish"
-        android:onClick="btn_finish"
+        android:onClick="btnFinish"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

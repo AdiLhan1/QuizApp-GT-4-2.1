@@ -3,20 +3,23 @@ package com.geektech.quizapp_gt_4_2.model;
 import java.util.Date;
 
 public class History {
-    private String categoryName;
-    private String correctAnswers;
-    private String difficulty;
-    private Date date;
     private int id;
+    private String categoryName;
+    private int correctAnswers;
+    private String difficulty;
+    private int amount;
+
+    private Date date;
 
     public History() {
     }
 
-    public History(String categoryName, String correctAnswers, String difficulty, Date date, int id) {
+    public History(int id, String categoryName, int correctAnswers, String difficulty, int amount, Date date) {
         this.categoryName = categoryName;
         this.correctAnswers = correctAnswers;
         this.difficulty = difficulty;
         this.date = date;
+        this.amount = amount;
         this.id = id;
     }
 
@@ -44,13 +47,22 @@ public class History {
         this.categoryName = categoryName;
     }
 
-    public String getCorrectAnswers() {
+    public int getCorrectAnswers() {
         return correctAnswers;
     }
 
-    public void setCorrectAnswers(String correctAnswers) {
+    public void setCorrectAnswers(int correctAnswers) {
         this.correctAnswers = correctAnswers;
     }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
 
     public String getDifficulty() {
         return difficulty;

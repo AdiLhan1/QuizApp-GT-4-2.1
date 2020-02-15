@@ -11,6 +11,7 @@ import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -77,13 +78,14 @@ public class QuizViewModel extends ViewModel {
     }
 
     void finishQuiz() {
+        Date currentTime = Calendar.getInstance().getTime();
         QuizResult result = new QuizResult(
                 id,
                 mCategory,
                 mDifficulty,
                 mQuestions,
                 getCorrectAnswersAmount(),
-                new Date()
+                currentTime
         );
         Log.e("-----", "finishQuiz: id:" + id + " category:" + mCategory + " difficulty:" + mDifficulty + " date:" + new Date() + "right asnwer" + getCorrectAnswersAmount());
 
