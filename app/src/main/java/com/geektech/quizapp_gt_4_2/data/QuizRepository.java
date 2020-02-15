@@ -74,13 +74,19 @@ public class QuizRepository implements IHistoryStorage, IQuizApiClient {
 
     @Override
     public void delete(QuizResult quizResult) {
+        historyStorage.delete(quizResult);
+    }
 
+    @Override
+    public void deleteById(int id) {
+        historyStorage.deleteById(id);
     }
 
     @Override
     public void deleteAll() {
-
+        historyStorage.deleteAll();
     }
+
 
     @Override
     public LiveData<List<QuizResult>> getAll() {

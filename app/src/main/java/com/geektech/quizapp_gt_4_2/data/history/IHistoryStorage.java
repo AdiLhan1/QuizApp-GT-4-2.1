@@ -18,5 +18,7 @@ public interface IHistoryStorage {
 
     void delete(QuizResult quizResult);
 
+    void deleteById(int id);
+
     void deleteAll();
 }

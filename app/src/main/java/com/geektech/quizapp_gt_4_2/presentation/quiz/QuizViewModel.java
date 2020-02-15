@@ -20,7 +20,7 @@ public class QuizViewModel extends ViewModel {
     private String mCategory = "Mixed";
     private String mDifficulty = "All";
     private List<Question> mQuestions;
-    private int id = 0;
+    private int id;
     private Integer count;
 
     MutableLiveData<List<Question>> question = new MutableLiveData<>();
@@ -87,8 +87,6 @@ public class QuizViewModel extends ViewModel {
                 getCorrectAnswersAmount(),
                 currentTime
         );
-        Log.e("-----", "finishQuiz: id:" + id + " category:" + mCategory + " difficulty:" + mDifficulty + " date:" + new Date() + "right asnwer" + getCorrectAnswersAmount());
-
         int resultId = App.historyStorage.saveQuizResult(result);
         finishEvent.call();
         openResultEvent.setValue(resultId);
@@ -98,7 +96,6 @@ public class QuizViewModel extends ViewModel {
         if (mQuestions.size() > position && position >= 0) {
             if (mQuestions.get(position).getSelectedAnswerPosition() == null) {
                 mQuestions.get(position).setSelectedAnswerPosition(selectedAnswerPosition);
-                Log.e("TAG", "onAnswerClick setAnswer: " + position + selectedAnswerPosition);
                 question.setValue(mQuestions);
             }
             if (position + 1 == mQuestions.size()) {

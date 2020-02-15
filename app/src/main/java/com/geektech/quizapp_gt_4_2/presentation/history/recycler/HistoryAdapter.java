@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
-    private List<History> historyList=new ArrayList<>();
+    private List<History> historyList = new ArrayList<>();
+    private HistoryViewHolder.Listener listener;
 
-    public HistoryAdapter() {
+    public HistoryAdapter(HistoryViewHolder.Listener listener) {
+        this.listener = listener;
     }
 
     public void updateHistory(List<History> list) {
@@ -28,7 +30,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
     @Override
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_item, parent, false);
-        return new HistoryViewHolder(view);
+        return new HistoryViewHolder(view, listener);
     }
 
     @Override

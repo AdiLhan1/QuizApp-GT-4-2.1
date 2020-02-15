@@ -54,7 +54,6 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void btnFinish(View view) {
-        MainActivity.start(ResultActivity.this);
         finish();
     }
 }
