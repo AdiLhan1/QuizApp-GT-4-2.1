@@ -1,5 +1,6 @@
 package com.geektech.quizapp_gt_4_2.presentation.history;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -71,13 +72,21 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.popup_delete:
-                    Toast.makeText(getContext(), "You are delete", Toast.LENGTH_SHORT).show();
                     App.historyStorage.deleteById(histories.get(position).getId());
+                    Toast.makeText(getContext(), "You are delete", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.popup_share:
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT,
+                            "Category name:" + histories.get(position).getCategoryName() +
+                                    "\n Correct answers:" + histories.get(position).getCorrectAnswers() +
+                                    "\n Difficulty:" + histories.get(position).getDifficulty() +
+                                    "\n Date:" + histories.get(position).getDate());
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
                     Toast.makeText(getContext(), "You are share", Toast.LENGTH_SHORT).show();
                     return true;
-
             }
             return false;
         });

@@ -1,5 +1,6 @@
 package com.geektech.quizapp_gt_4_2.presentation.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.geektech.quizapp_gt_4_2.App;
+import com.geektech.quizapp_gt_4_2.BuildConfig;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
 
@@ -47,6 +49,11 @@ public class SettingsFragment extends CoreFragment {
         super.onActivityCreated(savedInstanceState);
         settingsViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity()))
                 .get(SettingsViewModel.class);
+        clickListener();
+
+    }
+
+    private void clickListener() {
         tvClearHistory.setOnClickListener(v -> new AlertDialog.Builder(requireContext())
                 .setTitle("Очистка Истории")
                 .setMessage("Вы точно хотите очистить всю историю?")
@@ -58,6 +65,14 @@ public class SettingsFragment extends CoreFragment {
                 .setNegativeButton("Нет", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show());
+        tvShare.setOnClickListener(v -> {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,
+                    "Hey check out my app at: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        });
     }
 
 }
