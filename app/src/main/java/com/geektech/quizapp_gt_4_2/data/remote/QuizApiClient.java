@@ -24,7 +24,6 @@ public class QuizApiClient implements IQuizApiClient {
                 category,
                 difficulty
         );
-        Log.e("TAG", "getQuestions: URL-" + call.request().url());
         call.enqueue(new CoreCallback<QuizQuestionResponse>() {
             @Override
             public void onSuccess(QuizQuestionResponse result) {
@@ -44,7 +43,6 @@ public class QuizApiClient implements IQuizApiClient {
     @Override
     public void getCategories(final CategoriesCallback callback) {
         final Call<QuizCategoriesResponse> call = client.getCategories();
-        Log.e("TAG", "getCategories: URL-2-" + call.request().url());
         call.enqueue(new CoreCallback<QuizCategoriesResponse>() {
             @Override
             public void onSuccess(QuizCategoriesResponse result) {

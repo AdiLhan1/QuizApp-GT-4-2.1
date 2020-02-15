@@ -17,8 +17,8 @@ import java.util.List;
 
 public class QuizViewModel extends ViewModel {
     private IQuizApiClient quizApiClient = App.quizApiClient;
-    private String mCategory = "Mixed";
-    private String mDifficulty = "All";
+    private String mCategoryString;
+    private String mDifficultyString;
     private List<Question> mQuestions;
     private int id;
     private Integer count;
@@ -46,11 +46,15 @@ public class QuizViewModel extends ViewModel {
                 isLoading.setValue(false);
                 mQuestions = result;
                 question.postValue(mQuestions);
-                if (mQuestions.get(0).getCategory().equals(mQuestions.get(1).getCategory())) {
-                    mCategory = mQuestions.get(0).getCategory();
+                if (mQuestions.get(1).getCategory().equals(mQuestions.get(2).getCategory())) {
+                    mCategoryString = mQuestions.get(1).getCategory();
+                } else {
+                    mCategoryString = "Mixed";
                 }
-                if (mQuestions.get(0).getDifficulty().equals(mQuestions.get(1).getDifficulty())) {
-                    mDifficulty = mQuestions.get(0).getDifficulty().toString();
+                if (difficulty != null) {
+                    mDifficultyString = mQuestions.get(0).getDifficulty().toString();
+                } else {
+                    mDifficultyString = "All";
                 }
             }
 
@@ -81,8 +85,8 @@ public class QuizViewModel extends ViewModel {
         Date currentTime = Calendar.getInstance().getTime();
         QuizResult result = new QuizResult(
                 id,
-                mCategory,
-                mDifficulty,
+                mCategoryString,
+                mDifficultyString,
                 mQuestions,
                 getCorrectAnswersAmount(),
                 currentTime

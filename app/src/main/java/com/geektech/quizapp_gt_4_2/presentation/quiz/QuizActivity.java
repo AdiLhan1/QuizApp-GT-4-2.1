@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -129,7 +128,6 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     @SuppressLint("SetTextI18n")
     private void getPosition() {
         quizViewModel.currentQuestionsPosition.observe(this, integer -> {
-            Log.e("TAG", "getPosition: integer: " + integer);
             recyclerView.scrollToPosition(integer);
             quizAmount.setText(integer + 1 + "/" + amount);
             progressBar.setProgress(integer + 1);

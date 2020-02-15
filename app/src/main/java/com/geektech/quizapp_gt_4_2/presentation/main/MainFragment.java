@@ -30,7 +30,7 @@ public class MainFragment extends CoreFragment {
     private Button btnstart;
     private NiceSpinner categorySpinner, difficultySpinner;
     private SeekBar amountSeekbar;
-    private String difficult;
+    private String difficulty;
     private Integer category;
 
     public static MainFragment newInstance() {
@@ -66,19 +66,19 @@ public class MainFragment extends CoreFragment {
     private String getDifficultyId() {
         switch (difficultySpinner.getSelectedIndex()) {
             case 0:
-                difficult = null;
+                difficulty = null;
                 break;
             case 1:
-                difficult = "easy";
+                difficulty = "easy";
                 break;
             case 2:
-                difficult = "medium";
+                difficulty = "medium";
                 break;
             case 3:
-                difficult = "hard";
+                difficulty = "hard";
                 break;
         }
-        return difficult;
+        return difficulty;
     }
 
     @Override

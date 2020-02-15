@@ -1,7 +1,5 @@
 package com.geektech.quizapp_gt_4_2.data;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 
 import com.geektech.quizapp_gt_4_2.data.history.IHistoryStorage;
@@ -34,7 +32,6 @@ public class QuizRepository implements IHistoryStorage, IQuizApiClient {
 
         Collections.shuffle(answers);
         question.setAnswers(answers);
-        Log.e("TAG", "shuffleAnswers: " + answers);
         return question;
     }
 
@@ -45,7 +42,6 @@ public class QuizRepository implements IHistoryStorage, IQuizApiClient {
             public void onSuccess(List<Question> result) {
                 for (int i = 0; i < result.size(); i++) {
                     result.set(i, shuffleAnswers(result.get(i)));
-                    Log.e("TAG", "onSuccess:result " + result.get(i));
                 }
                 callback.onSuccess(result);
             }

@@ -58,7 +58,6 @@ public class SettingsFragment extends CoreFragment {
                 .setNegativeButton("Нет", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show());
-
     }
 
 }

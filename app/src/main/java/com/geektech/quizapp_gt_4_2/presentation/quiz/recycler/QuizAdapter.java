@@ -42,10 +42,4 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizViewHolder> {
     public int getItemCount() {
         return questionsList.size();
     }
-
-    public void setQuestionsList(List<Question> questionsList) {
-        this.questionsList.clear();
-        this.questionsList.addAll(questionsList);
-        notifyDataSetChanged();
-    }
 }

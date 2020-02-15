@@ -1,6 +1,5 @@
 package com.geektech.quizapp_gt_4_2.presentation.history.recycler;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,11 +29,10 @@ public class HistoryViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBind(History history) {
-        Log.e("TAG", "onBind: " + history.getCategoryName());
         category.setText(history.getCategoryName());
         answers.setText(history.getCorrectAnswers() + "/" + history.getAmount());
         difficulty.setText(history.getDifficulty());
-        date.setText(String.valueOf(history.getDate().toString()));
+        date.setText(history.getDate().toString());
     }
 
     public interface Listener {

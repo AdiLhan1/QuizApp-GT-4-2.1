@@ -9,13 +9,8 @@ import com.geektech.quizapp_gt_4_2.model.History;
 import java.util.List;
 
 public class HistoryViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
 
     private List<History> mHistory;
-    public LiveData<List<History>>history= App.historyStorage.getAllHistory();
-    // TODO: Implement the ViewModel
+    public LiveData<List<History>> history = App.historyStorage.getAllHistory();
 
-    void onHistoryClick(int position) {
-        mHistory.get(position);
-    }
 }

@@ -2,7 +2,6 @@ package com.geektech.quizapp_gt_4_2.presentation.quiz.recycler;
 
 import android.graphics.Color;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -60,7 +59,6 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
 
     public void onBind(Question question) {
         resetButtons();
-        Log.e("-------", "clickListener: CORRECT ANSWER:" + question.getCorrectAnswers());
         if (question.getSelectedAnswerPosition() == null) {
             setButton(true);
         } else {

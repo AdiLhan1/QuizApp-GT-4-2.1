@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.geektech.quizapp_gt_4_2.R;
-import com.geektech.quizapp_gt_4_2.presentation.main.MainActivity;
 
 public class ResultActivity extends AppCompatActivity {
     ResultViewModel resultViewModel;
@@ -19,6 +18,7 @@ public class ResultActivity extends AppCompatActivity {
     private TextView difficultValue;
     private TextView correctAnswerAmount;
     private TextView resultPercent;
+    private TextView category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,11 @@ public class ResultActivity extends AppCompatActivity {
 
     private void setViewContent() {
         resultViewModel.quizResult.observe(this, quizResult -> {
-            if (quizResult != null) {
-                difficultValue.setText(quizResult.getDifficulty());
-                correctAnswerAmount.setText(quizResult.getCorrectAnswersAmount() + "/" + quizResult.getQuestions().size());
-                int correctAnswersPercent = (int) ((double) quizResult.getCorrectAnswersAmount() / quizResult.getQuestions().size() * 100);
-                resultPercent.setText(correctAnswersPercent + " %");
-            }
+            category.setText(quizResult.getCategory());
+            difficultValue.setText(quizResult.getDifficulty());
+            correctAnswerAmount.setText(quizResult.getCorrectAnswersAmount() + "/" + quizResult.getQuestions().size());
+            int correctAnswersPercent = (int) ((double) quizResult.getCorrectAnswersAmount() / quizResult.getQuestions().size() * 100);
+            resultPercent.setText(correctAnswersPercent + " %");
         });
     }
 
@@ -47,6 +46,7 @@ public class ResultActivity extends AppCompatActivity {
         difficultValue = findViewById(R.id.tvResult_difficulty);
         correctAnswerAmount = findViewById(R.id.tvAnswerResult2);
         resultPercent = findViewById(R.id.tv_percent);
+        category = findViewById(R.id.tvResult_category);
     }
 
     public static void start(Context context, Integer id) {

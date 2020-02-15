@@ -17,7 +17,6 @@ import java.util.List;
 public class MainViewModel extends ViewModel {
 
     public MainViewModel() {
-        Log.d("ololo", "View model create");
     }
 
     public MutableLiveData<List<Category>> categoriesLiveData = new MutableLiveData<>();
@@ -36,7 +35,6 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onSuccess(QuizGlobalResponse result) {
                 globalLiveData.setValue(result);
-                Log.e("TAG", "Global " + result.getCategories() + result.getGlobal());
             }
 
             @Override
@@ -51,7 +49,6 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onSuccess(List<Category> result) {
                 categoriesLiveData.setValue(result);
-                Log.e("TAG", "Categories: " + result.get(0).getName() + result.get(0).getId());
             }
 
             @Override

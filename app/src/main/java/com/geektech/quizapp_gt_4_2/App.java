@@ -29,7 +29,7 @@ public class App extends Application {
 
         quizDatabase.historyDao();
 
-        repository = new QuizRepository(new QuizApiClient(),new HistoryStorage(quizDatabase.historyDao()));
+        repository = new QuizRepository(new QuizApiClient(), new HistoryStorage(quizDatabase.historyDao()));
 
         quizApiClient = repository;
         historyStorage = repository;
