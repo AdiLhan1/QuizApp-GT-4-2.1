@@ -9,12 +9,12 @@ public class History {
     private String difficulty;
     private int amount;
 
-    private Date date;
+    private String date;
 
     public History() {
     }
 
-    public History(int id, String categoryName, int correctAnswers, String difficulty, int amount, Date date) {
+    public History(int id, String categoryName, int correctAnswers, String difficulty, int amount, String date) {
         this.categoryName = categoryName;
         this.correctAnswers = correctAnswers;
         this.difficulty = difficulty;
@@ -31,11 +31,11 @@ public class History {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

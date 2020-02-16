@@ -31,9 +31,9 @@ public class QuizResult {
     private int correctAnswersAmount;
     @TypeConverters({TimestampConverter.class})
     @ColumnInfo(name = "created_at")
-    private Date createdAt;
+    private String createdAt;
 
-    public QuizResult(int id, String category, String difficulty, List<Question> questions, int correctAnswersAmount, Date createdAt) {
+    public QuizResult(int id, String category, String difficulty, List<Question> questions, int correctAnswersAmount, String createdAt) {
         this.id = id;
         this.category = category;
         this.difficulty = difficulty;
@@ -82,11 +82,11 @@ public class QuizResult {
         this.correctAnswersAmount = correctAnswersAmount;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }

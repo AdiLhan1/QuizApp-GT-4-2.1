@@ -152,5 +152,13 @@
         android:layout_height="0.5dp"
         android:background="@color/dark_purple"
         app:layout_constraintBottom_toBottomOf="@+id/settings_clear_history" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="44dp"
+        android:text="v1.0.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

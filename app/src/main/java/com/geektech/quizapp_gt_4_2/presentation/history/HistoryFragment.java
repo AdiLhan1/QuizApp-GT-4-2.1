@@ -79,20 +79,19 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
                     sendIntent.putExtra(Intent.EXTRA_TEXT,
-                            "Category name:" + histories.get(position).getCategoryName() +
-                                    "\n Correct answers:" + histories.get(position).getCorrectAnswers() +
-                                    "\n Difficulty:" + histories.get(position).getDifficulty() +
-                                    "\n Date:" + histories.get(position).getDate());
+                            "Game: QuizApp" +
+                                    "\nCategory name: " + histories.get(position).getCategoryName() +
+                                    "\nCorrect answers: " + histories.get(position).getCorrectAnswers() + "/" +
+                                    histories.get(position).getAmount() +
+                                    "\nDifficulty: " + histories.get(position).getDifficulty() +
+                                    "\nDate: " + histories.get(position).getDate());
                     sendIntent.setType("text/plain");
                     startActivity(sendIntent);
-                    Toast.makeText(getContext(), "You are share", Toast.LENGTH_SHORT).show();
                     return true;
             }
             return false;
         });
-        popupMenu.setOnDismissListener(menu -> Toast.makeText(getContext(), "onDismiss",
-                Toast.LENGTH_SHORT).show());
-        popupMenu.show();
+        popupMenu.setOnDismissListener(menu -> popupMenu.show());
     }
 
     @Override

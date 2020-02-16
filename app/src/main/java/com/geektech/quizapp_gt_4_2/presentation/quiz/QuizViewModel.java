@@ -1,5 +1,6 @@
 package com.geektech.quizapp_gt_4_2.presentation.quiz;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -11,6 +12,8 @@ import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -82,14 +85,15 @@ public class QuizViewModel extends ViewModel {
     }
 
     void finishQuiz() {
-        Date currentTime = Calendar.getInstance().getTime();
+        @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("d.MMM.yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime());
         QuizResult result = new QuizResult(
                 id,
                 mCategoryString,
                 mDifficultyString,
                 mQuestions,
                 getCorrectAnswersAmount(),
-                currentTime
+                date
         );
         int resultId = App.historyStorage.saveQuizResult(result);
         finishEvent.call();
