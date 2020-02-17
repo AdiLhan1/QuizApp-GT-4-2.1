@@ -60,7 +60,7 @@ public class QuizViewModel extends ViewModel {
                     }
                 } catch (IndexOutOfBoundsException e) {
                     isLoading.setValue(false);
-                    ToastHelper.show("В сервере недостаточно вопросов, пожалуйста уменьшите кол-во вопросов!");
+                    finishEvent.call();
                 }
             }
 

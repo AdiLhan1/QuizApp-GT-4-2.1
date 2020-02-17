@@ -145,6 +145,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
             ToastHelper.show("В сервере недостаточно вопросов, пожалуйста уменьшите кол-во вопросов!");
             layout.setVisibility(View.INVISIBLE);
             lottieAnimationView.setVisibility(View.VISIBLE);
+            finish();
         }
     }
 
