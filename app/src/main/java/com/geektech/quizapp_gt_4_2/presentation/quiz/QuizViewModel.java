@@ -11,11 +11,11 @@ import com.geektech.quizapp_gt_4_2.core.SingleLiveEvent;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
+import com.geektech.quizapp_gt_4_2.utils.ToastHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class QuizViewModel extends ViewModel {
@@ -39,25 +39,28 @@ public class QuizViewModel extends ViewModel {
         count = 0;
     }
 
-
     public void getQuestions(int amount, Integer category, String difficulty) {
         isLoading.setValue(true);
-
         quizApiClient.getQuestions(amount, category, difficulty, new IQuizApiClient.QuestionsCallback() {
             @Override
             public void onSuccess(List<Question> result) {
                 isLoading.setValue(false);
                 mQuestions = result;
                 question.postValue(mQuestions);
-                if (mQuestions.get(1).getCategory().equals(mQuestions.get(2).getCategory())) {
-                    mCategoryString = mQuestions.get(1).getCategory();
-                } else {
-                    mCategoryString = "Mixed";
-                }
-                if (difficulty != null) {
-                    mDifficultyString = mQuestions.get(0).getDifficulty().toString();
-                } else {
-                    mDifficultyString = "All";
+                try {
+                    if (mQuestions.get(1).getCategory().equals(mQuestions.get(2).getCategory())) {
+                        mCategoryString = mQuestions.get(1).getCategory();
+                    } else {
+                        mCategoryString = "Mixed";
+                    }
+                    if (difficulty != null) {
+                        mDifficultyString = mQuestions.get(0).getDifficulty().toString();
+                    } else {
+                        mDifficultyString = "All";
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    isLoading.setValue(false);
+                    ToastHelper.show("В сервере недостаточно вопросов, пожалуйста уменьшите кол-во вопросов!");
                 }
             }
 

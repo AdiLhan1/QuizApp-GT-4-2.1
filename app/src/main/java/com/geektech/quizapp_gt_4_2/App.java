@@ -1,6 +1,7 @@
 package com.geektech.quizapp_gt_4_2;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.room.Room;
 
@@ -16,10 +17,12 @@ public class App extends Application {
     public static IHistoryStorage historyStorage;
     public static QuizRepository repository;
     public static QuizDatabase quizDatabase;
+    public static Context instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         quizDatabase = Room.databaseBuilder(this,
                 QuizDatabase.class,
                 "quiz.db")

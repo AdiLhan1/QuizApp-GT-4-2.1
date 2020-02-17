@@ -1,8 +1,7 @@
 package com.geektech.quizapp_gt_4_2.data.remote;
 
-import android.util.Log;
-
 import com.geektech.quizapp_gt_4_2.core.CoreCallback;
+import com.geektech.quizapp_gt_4_2.utils.ToastHelper;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -20,23 +19,21 @@ public class QuizApiClient implements IQuizApiClient {
 
     @Override
     public void getQuestions(int amount, Integer category, String difficulty, final QuestionsCallback callback) {
-        final Call<QuizQuestionResponse> call = client.getQuestions(amount,
-                category,
-                difficulty
-        );
-        call.enqueue(new CoreCallback<QuizQuestionResponse>() {
-            @Override
-            public void onSuccess(QuizQuestionResponse result) {
-                callback.onSuccess(result.getResults());
-            }
+            final Call<QuizQuestionResponse> call = client.getQuestions(amount,
+                    category,
+                    difficulty
+            );
+            call.enqueue(new CoreCallback<QuizQuestionResponse>() {
+                @Override
+                public void onSuccess(QuizQuestionResponse result) {
+                    callback.onSuccess(result.getResults());
+                }
 
-            @Override
-            public void onFailure(Exception e) {
-                callback.onFailure(e);
-            }
-        });
-
-
+                @Override
+                public void onFailure(Exception e) {
+                    callback.onFailure(e);
+                }
+            });
     }
 
 

@@ -21,6 +21,7 @@ import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizAdapter;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizViewHolder;
 import com.geektech.quizapp_gt_4_2.presentation.result.ResultActivity;
+import com.geektech.quizapp_gt_4_2.utils.ToastHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,18 +128,24 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
 
     @SuppressLint("SetTextI18n")
     private void getPosition() {
-        quizViewModel.currentQuestionsPosition.observe(this, integer -> {
-            recyclerView.scrollToPosition(integer);
-            quizAmount.setText(integer + 1 + "/" + amount);
-            progressBar.setProgress(integer + 1);
-            progressBar.setMax(amount);
-            quizCategoryName.setText(questionsList.get(integer).getCategory());
-            if (integer + 1 == questionsList.size()) {
-                btnSkip.setText(R.string.finish);
-            } else {
-                btnSkip.setText(R.string.skip);
-            }
-        });
+        try {
+            quizViewModel.currentQuestionsPosition.observe(this, integer -> {
+                recyclerView.scrollToPosition(integer);
+                quizAmount.setText(integer + 1 + "/" + amount);
+                progressBar.setProgress(integer + 1);
+                progressBar.setMax(amount);
+                quizCategoryName.setText(questionsList.get(integer).getCategory());
+                if (integer + 1 == questionsList.size()) {
+                    btnSkip.setText(R.string.finish);
+                } else {
+                    btnSkip.setText(R.string.skip);
+                }
+            });
+        } catch (IndexOutOfBoundsException e) {
+            ToastHelper.show("В сервере недостаточно вопросов, пожалуйста уменьшите кол-во вопросов!");
+            layout.setVisibility(View.INVISIBLE);
+            lottieAnimationView.setVisibility(View.VISIBLE);
+        }
     }
 
     public void btnSkipClick(View view) {

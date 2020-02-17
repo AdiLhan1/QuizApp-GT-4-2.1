@@ -7,6 +7,7 @@ import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.model.History;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
+import com.geektech.quizapp_gt_4_2.utils.ToastHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,20 +38,20 @@ public class QuizRepository implements IHistoryStorage, IQuizApiClient {
 
     @Override
     public void getQuestions(int amount, Integer category, String difficulty, QuestionsCallback callback) {
-        quizApiClient.getQuestions(amount, category, difficulty, new QuestionsCallback() {
-            @Override
-            public void onSuccess(List<Question> result) {
-                for (int i = 0; i < result.size(); i++) {
-                    result.set(i, shuffleAnswers(result.get(i)));
+            quizApiClient.getQuestions(amount, category, difficulty, new QuestionsCallback() {
+                @Override
+                public void onSuccess(List<Question> result) {
+                    for (int i = 0; i < result.size(); i++) {
+                        result.set(i, shuffleAnswers(result.get(i)));
+                    }
+                    callback.onSuccess(result);
                 }
-                callback.onSuccess(result);
-            }
 
-            @Override
-            public void onFailure(Exception e) {
-                callback.onFailure(e);
-            }
-        });
+                @Override
+                public void onFailure(Exception e) {
+                    callback.onFailure(e);
+                }
+            });
     }
 
     @Override
