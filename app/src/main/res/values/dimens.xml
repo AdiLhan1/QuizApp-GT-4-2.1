@@ -50,4 +50,5 @@
     <dimen name="marginTop_81">81dp</dimen>
     <dimen name="marginTop_100">100dp</dimen>
     <dimen name="marginBottom_80">80dp</dimen>
+    <dimen name="result_category_tittle_margin">39dp</dimen>
 </resources>

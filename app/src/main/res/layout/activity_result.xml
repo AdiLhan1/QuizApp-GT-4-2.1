@@ -32,93 +32,108 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="342dp"
-        android:layout_height="174dp"
-        android:layout_marginTop="@dimen/marginTop_25"
+        android:id="@+id/result_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="17dp"
+        android:layout_marginTop="52dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgResult"
-        app:strokeWidth="4dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Category:"
-            android:fontFamily="@font/regular"
-            android:textColor="@color/colorBlack"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="@dimen/marginTop_22"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            />
+        app:layout_constraintTop_toBottomOf="@id/imgResult">
 
-        <TextView
-            android:id="@+id/tvResult_category"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="152dp"
-            android:layout_marginTop="@dimen/marginTop_22"
-            android:fontFamily="@font/regular"
-            android:text="Mixed"
-            android:textColor="@color/colorBlack"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            android:paddingHorizontal="26dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="62dp">
 
-        <TextView
-            style="@style/ResultCardViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="@dimen/marginTop_81"
-            android:text="Difficulty:" />
+            <TextView
+                android:id="@+id/ctgr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:fontFamily="@font/bold"
+                android:text="Category:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/middle_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvAnswerResult"
-            style="@style/ResultCardViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="134dp"
-            android:layout_marginTop="@dimen/marginTop_81"
-            android:text="Correct answers:" />
+            <TextView
+                android:id="@+id/tvResult_category"
+                android:layout_width="178dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:paddingTop="3dp"
+                android:fontFamily="@font/bold"
+                android:gravity="start|center"
+                android:text="Mixed"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/ctgr"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_result"
-            style="@style/ResultCardViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="272dp"
-            android:layout_marginTop="@dimen/marginTop_81"
-            android:text="Result:" />
+            <TextView
+                android:id="@+id/result_difficulty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/result_category_tittle_margin"
+                android:text="Difficulty:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvResult_category" />
 
-        <TextView
-            android:id="@+id/tvResult_difficulty"
-            style="ResultTextViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:textAllCaps="false"
-            android:layout_marginTop="@dimen/marginTop_100"
-            android:text="All" />
+            <TextView
+                android:id="@+id/tvResult_difficulty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="All"
+                app:layout_constraintEnd_toEndOf="@id/result_difficulty"
+                app:layout_constraintStart_toStartOf="@id/result_difficulty"
+                app:layout_constraintTop_toBottomOf="@id/result_difficulty" />
 
-        <TextView
-            android:id="@+id/tvAnswerResult2"
-            style="ResultTextViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="@dimen/marginTop_100"
-            android:text="8/10" />
+            <TextView
+                android:id="@+id/correct_answers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correct Answers:"
+                app:layout_constraintBottom_toBottomOf="@id/result_difficulty"
+                app:layout_constraintEnd_toStartOf="@+id/result_percent"
+                app:layout_constraintStart_toEndOf="@+id/result_difficulty"
+                app:layout_constraintTop_toTopOf="@+id/result_difficulty" />
 
-        <TextView
-            android:id="@+id/tv_percent"
-            style="ResultTextViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="277dp"
-            android:layout_marginTop="@dimen/marginTop_100"
-            android:text="80%" />
+            <TextView
+                android:id="@+id/tvAnswerResult2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="8/10"
+                app:layout_constraintEnd_toEndOf="@id/correct_answers"
+                app:layout_constraintStart_toStartOf="@id/correct_answers"
+                app:layout_constraintTop_toBottomOf="@id/result_difficulty" />
 
+            <TextView
+                android:id="@+id/result_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/result_category_tittle_margin"
+                android:text="Result:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvResult_category" />
+
+            <TextView
+                android:id="@+id/tv_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="80%"
+                app:layout_constraintEnd_toEndOf="@id/result_percent"
+                app:layout_constraintStart_toStartOf="@id/result_percent"
+                app:layout_constraintTop_toBottomOf="@id/result_difficulty" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -127,8 +142,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/marginBottom_80"
         android:background="@drawable/rounded_btn_green"
-        android:text="Finish"
         android:onClick="btnFinish"
+        android:text="Finish"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

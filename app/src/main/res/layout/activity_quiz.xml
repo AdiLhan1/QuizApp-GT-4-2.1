@@ -39,10 +39,12 @@
         <TextView
             android:id="@+id/quiz_categoryName"
             style="@style/TVNameItemStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="48dp"
+            android:layout_marginStart="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/path"
             app:layout_constraintStart_toEndOf="@+id/path"

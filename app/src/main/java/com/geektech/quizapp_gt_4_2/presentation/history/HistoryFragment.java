@@ -73,7 +73,6 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
             switch (item.getItemId()) {
                 case R.id.popup_delete:
                     App.historyStorage.deleteById(histories.get(position).getId());
-                    Toast.makeText(getContext(), "You are delete", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.popup_share:
                     Intent sendIntent = new Intent();
@@ -91,7 +90,9 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
             }
             return false;
         });
-        popupMenu.setOnDismissListener(menu -> popupMenu.show());
+        popupMenu.setOnDismissListener(menu -> Toast.makeText(getContext(), "onDismiss",
+                Toast.LENGTH_SHORT).show());
+        popupMenu.show();
     }
 
     @Override
