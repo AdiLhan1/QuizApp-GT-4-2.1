@@ -40,7 +40,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private List<Question> questionsList = new ArrayList<>();
     private QuizAdapter adapter;
     private LottieAnimationView lottieAnimationView;
-    private TextView quizCategoryName, quizAmount;
+    private TextView quizCategoryName, quizAmount, tvTime;
     private ProgressBar progressBar;
 
     public static void start(Context context, Integer amount, Integer category, String difficulty) {
@@ -65,6 +65,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         quizViewModel.openResultEvent.observe(this, integer ->
                 ResultActivity.start(QuizActivity.this, integer)
         );
+        quizViewModel.timeDown.observe(this, aLong -> tvTime.setText(aLong.toString()));
     }
 
     private void initLoading() {
@@ -101,6 +102,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         quizCategoryName = findViewById(R.id.quiz_categoryName);
         quizAmount = findViewById(R.id.quiz_amount);
         progressBar = findViewById(R.id.quiz_item_progressBar);
+        tvTime = findViewById(R.id.tv_time);
     }
 
     private void getQuestions() {
@@ -130,6 +132,7 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private void getPosition() {
         try {
             quizViewModel.currentQuestionsPosition.observe(this, integer -> {
+                quizViewModel.startTimeDown();
                 recyclerView.scrollToPosition(integer);
                 quizAmount.setText(integer + 1 + "/" + amount);
                 progressBar.setProgress(integer + 1);
@@ -161,6 +164,10 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     @Override
     public void onBackPressed() {
         quizViewModel.onBackPressed();
+    }
+
+    public void onBtnFinish(View view) {
+        quizViewModel.finishEvent.call();
     }
 
     @Override

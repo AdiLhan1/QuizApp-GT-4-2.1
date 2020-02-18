@@ -1,6 +1,7 @@
 package com.geektech.quizapp_gt_4_2.presentation.quiz;
 
 import android.annotation.SuppressLint;
+import android.os.CountDownTimer;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -11,7 +12,6 @@ import com.geektech.quizapp_gt_4_2.core.SingleLiveEvent;
 import com.geektech.quizapp_gt_4_2.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.model.QuizResult;
-import com.geektech.quizapp_gt_4_2.utils.ToastHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,11 +24,15 @@ public class QuizViewModel extends ViewModel {
     private String mDifficultyString;
     private List<Question> mQuestions;
     private int id;
+    private long i = 30000;
+    private long j;
     private Integer count;
+    private CountDownTimer countDownTimer;
 
     MutableLiveData<List<Question>> question = new MutableLiveData<>();
     MutableLiveData<Integer> currentQuestionsPosition = new MutableLiveData<>();
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    MutableLiveData<Long> timeDown = new MutableLiveData<>();
 
     SingleLiveEvent<Integer> openResultEvent = new SingleLiveEvent<>();
     SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
@@ -87,6 +91,30 @@ public class QuizViewModel extends ViewModel {
         return correctAnswerAmounts;
     }
 
+    void startTimeDown() {
+        Log.e("TAG", "startTimeDown: " + mQuestions.get(currentQuestionsPosition.getValue()).getSelectedAnswerPosition());
+        if (countDownTimer != null) countDownTimer.cancel();
+//        if (mQuestions.get(currentQuestionsPosition.getValue()).getSelectedAnswerPosition() != null)
+//            countDownTimer.cancel();
+//        if (j > 0 && j < 29) {
+//            i = j * 1000;
+//        } else {
+//            i = 30000;
+//        }
+        countDownTimer = new CountDownTimer(i, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timeDown.setValue(millisUntilFinished / 1000);
+//                j = millisUntilFinished / 1000;
+//                Log.e("TAG", "onTick: " + j);
+            }
+
+            public void onFinish() {
+                onSkipClick();
+            }
+        }.start();
+    }
+
     void finishQuiz() {
         @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("d.MMM.yyyy, HH:mm");
         String date = df.format(Calendar.getInstance().getTime());
@@ -112,7 +140,14 @@ public class QuizViewModel extends ViewModel {
             if (position + 1 == mQuestions.size()) {
                 finishQuiz();
             } else {
-                currentQuestionsPosition.setValue(++count);
+                new CountDownTimer(500, 1000) {
+                    public void onTick(long millisUntilFinished) {
+                    }
+
+                    public void onFinish() {
+                        currentQuestionsPosition.setValue(++count);
+                    }
+                }.start();
             }
         }
     }
@@ -136,11 +171,14 @@ public class QuizViewModel extends ViewModel {
         if (currentPosition != null) {
             if (currentPosition != 0) {
                 currentQuestionsPosition.setValue(--count);
+                countDownTimer.cancel();
             } else {
                 finishEvent.call();
+                countDownTimer.cancel();
             }
         } else {
             finishEvent.call();
+            countDownTimer.cancel();
         }
     }
 }

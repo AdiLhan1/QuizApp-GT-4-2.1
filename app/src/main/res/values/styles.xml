@@ -40,6 +40,15 @@
         <item name="android:background">@drawable/skip_btn_style</item>
     </style>
 
+    <style name="ButtonFinishStyle">
+        <item name="android:text">Finish</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:font" tools:targetApi="o">@font/bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/finish_btn</item>
+    </style>
+
     <style name="SpinnerStyle">
         <item name="android:background">#FC89FA</item>
     </style>
