@@ -3,8 +3,6 @@ package com.geektech.quizapp_gt_4_2.presentation.quiz;
 import android.annotation.SuppressLint;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -109,29 +107,19 @@ public class QuizViewModel extends ViewModel {
         }.start();
     }
 
-    @SuppressLint("SetTextI18n")
-    void delayTime(RecyclerView recyclerView, Integer integer, TextView quizAmount, ProgressBar progressBar, TextView quizCategoryName, List<Question> questionsList, Integer amount) {
+    void delayTime(RecyclerView recyclerView, Integer i) {
         if (isClicked) {
             new CountDownTimer(300, 1000) {
                 public void onTick(long millisUntilFinished) {
                 }
 
-                @SuppressLint("SetTextI18n")
                 public void onFinish() {
-                    recyclerView.scrollToPosition(integer);
-                    quizAmount.setText(integer + 1 + "/" + amount);
-                    progressBar.setProgress(integer + 1);
-                    progressBar.setMax(amount);
-                    quizCategoryName.setText(questionsList.get(integer).getCategory());
+                    recyclerView.scrollToPosition(i);
                     cancel();
                 }
             }.start();
         } else {
-            recyclerView.scrollToPosition(integer);
-            quizAmount.setText(integer + 1 + "/" + amount);
-            progressBar.setProgress(integer + 1);
-            progressBar.setMax(amount);
-            quizCategoryName.setText(questionsList.get(integer).getCategory());
+            recyclerView.scrollToPosition(i);
         }
     }
 

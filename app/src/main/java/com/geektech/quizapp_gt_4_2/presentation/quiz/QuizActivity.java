@@ -136,7 +136,11 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
                 if (integer != null) {
                     Log.e("TAG", "getPosition: " + questionsList.get(integer).getSelectedAnswerPosition());
                     quizViewModel.startTimeDown();
-                    quizViewModel.delayTime(recyclerView, integer, quizAmount, progressBar, quizCategoryName, questionsList, amount);
+                    quizViewModel.delayTime(recyclerView, integer);
+                    quizAmount.setText(integer + 1 + "/" + amount);
+                    progressBar.setProgress(integer + 1);
+                    progressBar.setMax(amount);
+                    quizCategoryName.setText(questionsList.get(integer).getCategory());
                     if (integer + 1 == questionsList.size()) {
                         btnSkip.setText(R.string.finish);
                     } else {
