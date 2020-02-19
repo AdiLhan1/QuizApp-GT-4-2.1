@@ -4,7 +4,6 @@
     <style name="BoldText">
         <item name="android:fontFamily" />
         <item name="android:font">@font/bold</item>
-        <item name="android:text">Quiz</item>
         <item name="android:textSize">26sp</item>
         <item name="android:textColor">#000</item>
         <item name="android:textStyle">bold</item>

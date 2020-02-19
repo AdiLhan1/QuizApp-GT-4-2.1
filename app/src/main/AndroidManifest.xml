@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".internet.NoInternetActivity"></activity>
         <activity android:name=".presentation.result.ResultActivity" />
         <activity android:name=".presentation.quiz.QuizActivity" />
         <activity

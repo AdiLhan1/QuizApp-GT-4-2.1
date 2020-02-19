@@ -11,11 +11,11 @@
         style="@style/BoldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/tittle_margin_top"
         android:layout_marginStart="@dimen/tittle_margin_start"
-        android:text="History" />
+        android:layout_marginTop="@dimen/tittle_margin_top"
+        android:text="History"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_recycler_view"
@@ -25,6 +25,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/history_title"
         tools:listitem="@layout/history_item" />
+
+    <TextView
+        android:id="@+id/history_empty"
+        style="@style/RegularText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:visibility="invisible"
+        android:layout_marginBottom="150dp"
+        android:text="History is empty"
+        android:textColor="@color/gray_text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_title" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

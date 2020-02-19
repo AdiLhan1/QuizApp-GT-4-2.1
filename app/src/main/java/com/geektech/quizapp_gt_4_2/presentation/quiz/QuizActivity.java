@@ -18,10 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.geektech.quizapp_gt_4_2.R;
+import com.geektech.quizapp_gt_4_2.internet.NoInternetActivity;
 import com.geektech.quizapp_gt_4_2.model.Question;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizAdapter;
 import com.geektech.quizapp_gt_4_2.presentation.quiz.recycler.QuizViewHolder;
 import com.geektech.quizapp_gt_4_2.presentation.result.ResultActivity;
+import com.geektech.quizapp_gt_4_2.utils.CheckInternetConnection;
 import com.geektech.quizapp_gt_4_2.utils.ToastHelper;
 
 import java.util.ArrayList;
@@ -52,11 +54,19 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
         );
     }
 
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, QuizActivity.class));
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        if (!CheckInternetConnection.isNetworkAvailable()) {
+            NoInternetActivity.start(this);
+            finish();
+        }
         quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         initViews();
         initLoading();

@@ -23,9 +23,7 @@ public class HistoryViewHolder extends RecyclerView.ViewHolder {
         difficulty = itemView.findViewById(R.id.history_difficulty);
         date = itemView.findViewById(R.id.history_date);
         dots = itemView.findViewById(R.id.dots);
-        dots.setOnClickListener(v -> {
-            listener.onClick(v, getAdapterPosition());
-        });
+        dots.setOnClickListener(v -> listener.onClick(v, getAdapterPosition()));
     }
 
     public void onBind(History history) {

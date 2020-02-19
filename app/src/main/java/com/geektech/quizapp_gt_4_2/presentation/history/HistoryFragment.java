@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
     private RecyclerView recyclerView;
     private HistoryAdapter adapter;
     private List<History> histories;
+    private TextView historyEmpty;
 
     public static HistoryFragment newInstance() {
         return new HistoryFragment();
@@ -42,9 +44,9 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.history_recycler_view);
+        historyEmpty = view.findViewById(R.id.history_empty);
         recyclerBuilder();
         adapter.updateHistory(new ArrayList<>());
-
     }
 
     @Override
@@ -60,6 +62,10 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
     }
 
     private void recyclerBuilder() {
+        if (recyclerView == null) {
+            historyEmpty.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         adapter = new HistoryAdapter(this);
         recyclerView.setAdapter(adapter);
