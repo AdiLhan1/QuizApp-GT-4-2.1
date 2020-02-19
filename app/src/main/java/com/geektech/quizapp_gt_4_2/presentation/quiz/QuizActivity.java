@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -132,16 +133,15 @@ public class QuizActivity extends AppCompatActivity implements QuizViewHolder.Li
     private void getPosition() {
         try {
             quizViewModel.currentQuestionsPosition.observe(this, integer -> {
-                quizViewModel.startTimeDown();
-                recyclerView.scrollToPosition(integer);
-                quizAmount.setText(integer + 1 + "/" + amount);
-                progressBar.setProgress(integer + 1);
-                progressBar.setMax(amount);
-                quizCategoryName.setText(questionsList.get(integer).getCategory());
-                if (integer + 1 == questionsList.size()) {
-                    btnSkip.setText(R.string.finish);
-                } else {
-                    btnSkip.setText(R.string.skip);
+                if (integer != null) {
+                    Log.e("TAG", "getPosition: " + questionsList.get(integer).getSelectedAnswerPosition());
+                    quizViewModel.startTimeDown();
+                    quizViewModel.delayTime(recyclerView, integer, quizAmount, progressBar, quizCategoryName, questionsList, amount);
+                    if (integer + 1 == questionsList.size()) {
+                        btnSkip.setText(R.string.finish);
+                    } else {
+                        btnSkip.setText(R.string.skip);
+                    }
                 }
             });
         } catch (IndexOutOfBoundsException e) {

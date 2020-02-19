@@ -3,9 +3,12 @@ package com.geektech.quizapp_gt_4_2.presentation.quiz;
 import android.annotation.SuppressLint;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.core.SingleLiveEvent;
@@ -26,6 +29,7 @@ public class QuizViewModel extends ViewModel {
     private int id;
     private long i = 30000;
     private long j;
+    private Boolean isClicked = true;
     private Integer count;
     private CountDownTimer countDownTimer;
 
@@ -84,7 +88,7 @@ public class QuizViewModel extends ViewModel {
                 String selectedAnswer = mQuestions.get(i).getAnswers()
                         .get(mQuestions.get(i).getSelectedAnswerPosition());
                 if (correctAnswer.equals(selectedAnswer)) {
-                    ++correctAnswerAmounts;
+                    correctAnswerAmounts++;
                 }
             }
         }
@@ -92,27 +96,43 @@ public class QuizViewModel extends ViewModel {
     }
 
     void startTimeDown() {
-        Log.e("TAG", "startTimeDown: " + mQuestions.get(currentQuestionsPosition.getValue()).getSelectedAnswerPosition());
         if (countDownTimer != null) countDownTimer.cancel();
-//        if (mQuestions.get(currentQuestionsPosition.getValue()).getSelectedAnswerPosition() != null)
-//            countDownTimer.cancel();
-//        if (j > 0 && j < 29) {
-//            i = j * 1000;
-//        } else {
-//            i = 30000;
-//        }
         countDownTimer = new CountDownTimer(i, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timeDown.setValue(millisUntilFinished / 1000);
-//                j = millisUntilFinished / 1000;
-//                Log.e("TAG", "onTick: " + j);
             }
 
             public void onFinish() {
                 onSkipClick();
             }
         }.start();
+    }
+
+    @SuppressLint("SetTextI18n")
+    void delayTime(RecyclerView recyclerView, Integer integer, TextView quizAmount, ProgressBar progressBar, TextView quizCategoryName, List<Question> questionsList, Integer amount) {
+        if (isClicked) {
+            new CountDownTimer(300, 1000) {
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @SuppressLint("SetTextI18n")
+                public void onFinish() {
+                    recyclerView.scrollToPosition(integer);
+                    quizAmount.setText(integer + 1 + "/" + amount);
+                    progressBar.setProgress(integer + 1);
+                    progressBar.setMax(amount);
+                    quizCategoryName.setText(questionsList.get(integer).getCategory());
+                    cancel();
+                }
+            }.start();
+        } else {
+            recyclerView.scrollToPosition(integer);
+            quizAmount.setText(integer + 1 + "/" + amount);
+            progressBar.setProgress(integer + 1);
+            progressBar.setMax(amount);
+            quizCategoryName.setText(questionsList.get(integer).getCategory());
+        }
     }
 
     void finishQuiz() {
@@ -139,15 +159,10 @@ public class QuizViewModel extends ViewModel {
             }
             if (position + 1 == mQuestions.size()) {
                 finishQuiz();
+                countDownTimer.cancel();
             } else {
-                new CountDownTimer(500, 1000) {
-                    public void onTick(long millisUntilFinished) {
-                    }
-
-                    public void onFinish() {
-                        currentQuestionsPosition.setValue(++count);
-                    }
-                }.start();
+                isClicked = true;
+                currentQuestionsPosition.setValue(++count);
             }
         }
     }
@@ -161,6 +176,7 @@ public class QuizViewModel extends ViewModel {
         Integer currentPosition = currentQuestionsPosition.getValue();
         if (currentPosition != null) {
             onAnswerClick(currentQuestionsPosition.getValue(), -1);
+            isClicked = false;
         } else {
             finishQuiz();
         }
@@ -172,6 +188,7 @@ public class QuizViewModel extends ViewModel {
             if (currentPosition != 0) {
                 currentQuestionsPosition.setValue(--count);
                 countDownTimer.cancel();
+                isClicked = false;
             } else {
                 finishEvent.call();
                 countDownTimer.cancel();
