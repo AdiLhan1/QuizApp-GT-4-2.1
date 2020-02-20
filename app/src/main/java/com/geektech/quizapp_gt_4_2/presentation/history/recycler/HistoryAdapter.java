@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
-    public  List<History> historyList = new ArrayList<>();
+    public List<History> historyList = new ArrayList<>();
     private HistoryViewHolder.Listener listener;
 
     public HistoryAdapter(HistoryViewHolder.Listener listener) {

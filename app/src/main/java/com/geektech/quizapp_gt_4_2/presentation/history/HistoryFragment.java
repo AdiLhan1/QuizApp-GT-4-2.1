@@ -57,15 +57,18 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
             this.histories = histories;
             if (histories != null) {
                 adapter.updateHistory(histories);
+                if (histories.size() == 0) {
+                    historyEmpty.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.INVISIBLE);
+                } else {
+                    historyEmpty.setVisibility(View.INVISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
 
     private void recyclerBuilder() {
-        if (recyclerView == null) {
-            historyEmpty.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.INVISIBLE);
-        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         adapter = new HistoryAdapter(this);
         recyclerView.setAdapter(adapter);
@@ -106,3 +109,4 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
         showPopupMenu(view, position);
     }
 }
+
