@@ -65,8 +65,9 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         } else {
             setButton(false);
         }
-        name.setText(Html.fromHtml(
-                question.getQuestion()));
+//        App.myTranslator.translate(Html.fromHtml(question.getQuestion()).toString())
+//                .addOnSuccessListener(s -> name.setText(s));
+        name.setText(Html.fromHtml(question.getQuestion()));
         if (question.getType() == EType.MULTIPLE) {
             buttonMultiple.setVisibility(View.VISIBLE);
             booleanButtons.setVisibility(View.INVISIBLE);
@@ -74,6 +75,7 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
         } else {
             booleanButtons.setVisibility(View.VISIBLE);
             buttonMultiple.setVisibility(View.INVISIBLE);
+            setTextButtons(question, booleanBtnFalse, booleanBtnTrue);
         }
         if (question.getSelectedAnswerPosition() != null) {
             setSelected(question);
@@ -83,6 +85,8 @@ public class QuizViewHolder extends RecyclerView.ViewHolder {
     private void setTextButtons(Question question, Button... buttons) {
         int i = 0;
         for (Button button : buttons) {
+//            App.myTranslator.translate(Html.fromHtml(question.getAnswers().get(i)).toString())
+//                    .addOnSuccessListener(button::setText);
             button.setText(Html.fromHtml(question.getAnswers().get(i)));
             i++;
         }

@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.BuildConfig;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
@@ -54,17 +53,19 @@ public class SettingsFragment extends CoreFragment {
     }
 
     private void clickListener() {
-        tvClearHistory.setOnClickListener(v -> new AlertDialog.Builder(requireContext())
-                .setTitle("Очистка Истории")
-                .setMessage("Вы точно хотите очистить всю историю?")
+        tvClearHistory.setOnClickListener(v ->
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Очистка Истории")
+                        .setMessage("Вы точно хотите очистить всю историю?")
 
-                .setPositiveButton("Да", (dialog, which) -> {
-                    App.historyStorage.deleteAll();
-                })
+                        .setPositiveButton("Да", (dialog, which) -> {
+                            settingsViewModel.clearAllHistory();
+                        })
 
-                .setNegativeButton("Нет", null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show());
+                        .setNegativeButton("Нет", null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show());
+
         tvShare.setOnClickListener(v -> {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
