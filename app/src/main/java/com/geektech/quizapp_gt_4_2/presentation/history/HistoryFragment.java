@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
 import com.geektech.quizapp_gt_4_2.model.History;
@@ -81,7 +80,7 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.popup_delete:
-                    App.historyStorage.deleteById(histories.get(position).getId());
+                    mViewModel.clearHistoryById(histories, position);
                     return true;
                 case R.id.popup_share:
                     Intent sendIntent = new Intent();

@@ -10,7 +10,9 @@ import java.util.List;
 
 public class HistoryViewModel extends ViewModel {
 
-    private List<History> mHistory;
     public LiveData<List<History>> history = App.historyStorage.getAllHistory();
 
+    public void clearHistoryById(List<History> histories, int position) {
+        App.historyStorage.deleteById(histories.get(position).getId());
+    }
 }
