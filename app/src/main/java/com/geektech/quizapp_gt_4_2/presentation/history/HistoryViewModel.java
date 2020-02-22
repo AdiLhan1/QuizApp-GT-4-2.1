@@ -14,4 +14,5 @@ public class HistoryViewModel extends ViewModel {
     public LiveData<List<History>> history = App.historyStorage.getAllHistory();
     public SingleLiveEvent<Void> share = new SingleLiveEvent<>();
     public SingleLiveEvent<Void> deleteById = new SingleLiveEvent<>();
+
 }

@@ -1,6 +1,5 @@
 package com.geektech.quizapp_gt_4_2.presentation.history;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -13,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
 import com.geektech.quizapp_gt_4_2.model.History;
@@ -48,20 +46,20 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
         historyEmpty = view.findViewById(R.id.history_empty);
         recyclerBuilder();
         adapter.updateHistory(new ArrayList<>());
-        mViewModel.share.observe(this, aVoid -> {
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT,
-                    "Game: QuizApp" +
-                            "\nCategory name: " + histories.get(position).getCategoryName() +
-                            "\nCorrect answers: " + histories.get(position).getCorrectAnswers() + "/" +
-                            histories.get(position).getAmount() +
-                            "\nDifficulty: " + histories.get(position).getDifficulty() +
-                            "\nDate: " + histories.get(position).getDate());
-            sendIntent.setType("text/plain");
-            startActivity(sendIntent);
-        });
-        mViewModel.deleteById.observe(this, aVoid -> App.historyStorage.deleteById(histories.get(position).getId()));
+//        mViewModel.share.observe(this, aVoid -> {
+//            Intent sendIntent = new Intent();
+//            sendIntent.setAction(Intent.ACTION_SEND);
+//            sendIntent.putExtra(Intent.EXTRA_TEXT,
+//                    "Game: QuizApp" +
+//                            "\nCategory name: " + histories.get(position).getCategoryName() +
+//                            "\nCorrect answers: " + histories.get(position).getCorrectAnswers() + "/" +
+//                            histories.get(position).getAmount() +
+//                            "\nDifficulty: " + histories.get(position).getDifficulty() +
+//                            "\nDate: " + histories.get(position).getDate());
+//            sendIntent.setType("text/plain");
+//            startActivity(sendIntent);
+//        });
+//        mViewModel.deleteById.observe(this, aVoid -> App.historyStorage.deleteById(histories.get(position).getId()));
     }
 
     @Override

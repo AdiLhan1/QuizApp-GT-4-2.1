@@ -179,7 +179,6 @@ public class QuizViewModel extends ViewModel {
                 isClicked = false;
             } else {
                 finishEvent.call();
-                countDownTimer.cancel();
             }
         } else {
             finishEvent.call();

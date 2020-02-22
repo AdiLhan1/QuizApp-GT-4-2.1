@@ -35,7 +35,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void setViewContent() {
         resultViewModel.quizResult.observe(this, quizResult -> {
-            category.setText(quizResult.getCategory());
+            category.setText("Category: " + quizResult.getCategory());
             difficultValue.setText(quizResult.getDifficulty());
             correctAnswerAmount.setText(quizResult.getCorrectAnswersAmount() + "/" + quizResult.getQuestions().size());
             int correctAnswersPercent = (int) ((double) quizResult.getCorrectAnswersAmount() / quizResult.getQuestions().size() * 100);
@@ -52,7 +52,7 @@ public class ResultActivity extends AppCompatActivity {
             if (correctAnswersPercent > 50 && correctAnswersPercent <= 89) {
                 imageView.setImageResource(R.drawable.cool);
             }
-            if (correctAnswersPercent > 89 && correctAnswersPercent <= 100){
+            if (correctAnswersPercent > 89 && correctAnswersPercent <= 100) {
                 imageView.setImageResource(R.drawable.best_quality);
             }
         });
