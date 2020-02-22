@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.geektech.quizapp_gt_4_2.App;
+import com.geektech.quizapp_gt_4_2.core.SingleLiveEvent;
 import com.geektech.quizapp_gt_4_2.model.History;
 
 import java.util.List;
@@ -11,8 +12,6 @@ import java.util.List;
 public class HistoryViewModel extends ViewModel {
 
     public LiveData<List<History>> history = App.historyStorage.getAllHistory();
-
-    public void clearHistoryById(List<History> histories, int position) {
-        App.historyStorage.deleteById(histories.get(position).getId());
-    }
+    public SingleLiveEvent<Void> share = new SingleLiveEvent<>();
+    public SingleLiveEvent<Void> deleteById = new SingleLiveEvent<>();
 }

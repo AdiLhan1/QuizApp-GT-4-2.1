@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.geektech.quizapp_gt_4_2.App;
 import com.geektech.quizapp_gt_4_2.R;
 import com.geektech.quizapp_gt_4_2.core.CoreFragment;
 import com.geektech.quizapp_gt_4_2.model.History;
@@ -29,6 +30,7 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
     private HistoryAdapter adapter;
     private List<History> histories;
     private TextView historyEmpty;
+    private int position;
 
     public static HistoryFragment newInstance() {
         return new HistoryFragment();
@@ -46,6 +48,20 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
         historyEmpty = view.findViewById(R.id.history_empty);
         recyclerBuilder();
         adapter.updateHistory(new ArrayList<>());
+        mViewModel.share.observe(this, aVoid -> {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,
+                    "Game: QuizApp" +
+                            "\nCategory name: " + histories.get(position).getCategoryName() +
+                            "\nCorrect answers: " + histories.get(position).getCorrectAnswers() + "/" +
+                            histories.get(position).getAmount() +
+                            "\nDifficulty: " + histories.get(position).getDifficulty() +
+                            "\nDate: " + histories.get(position).getDate());
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        });
+        mViewModel.deleteById.observe(this, aVoid -> App.historyStorage.deleteById(histories.get(position).getId()));
     }
 
     @Override
@@ -65,6 +81,7 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
                 }
             }
         });
+
     }
 
     private void recyclerBuilder() {
@@ -74,26 +91,17 @@ public class HistoryFragment extends CoreFragment implements HistoryViewHolder.L
     }
 
     private void showPopupMenu(View view, int position) {
+        this.position = position;
         PopupMenu popupMenu = new PopupMenu(getContext(), view);
         popupMenu.inflate(R.menu.menu_popup);
 
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.popup_delete:
-                    mViewModel.clearHistoryById(histories, position);
+                    mViewModel.deleteById.call();
                     return true;
                 case R.id.popup_share:
-                    Intent sendIntent = new Intent();
-                    sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT,
-                            "Game: QuizApp" +
-                                    "\nCategory name: " + histories.get(position).getCategoryName() +
-                                    "\nCorrect answers: " + histories.get(position).getCorrectAnswers() + "/" +
-                                    histories.get(position).getAmount() +
-                                    "\nDifficulty: " + histories.get(position).getDifficulty() +
-                                    "\nDate: " + histories.get(position).getDate());
-                    sendIntent.setType("text/plain");
-                    startActivity(sendIntent);
+                    mViewModel.share.call();
                     return true;
             }
             return false;

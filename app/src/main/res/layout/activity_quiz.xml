@@ -106,8 +106,8 @@
             app:layout_constraintRight_toRightOf="parent" />
 
         <Button
-            android:id="@+id/quiz_btn_finish"
-            style="@style/ButtonFinishStyle"
+            android:id="@+id/quiz_btn_exit"
+            style="@style/ButtonExitStyle"
             android:layout_width="90dp"
             android:layout_height="40dp"
             android:layout_marginStart="40dp"
